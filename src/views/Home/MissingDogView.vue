@@ -52,7 +52,6 @@ onMounted(() => {
   position: relative;
   max-width: 100%;
   height: 40rem;
-  margin-top: 2rem;
   overflow: hidden;
 }
 
@@ -66,6 +65,9 @@ onMounted(() => {
   background-repeat: no-repeat;
   background-position: center;
   display: none;
+  box-shadow: 0px 0px 36px 62px rgba(255,255,255,0.89) inset;
+-webkit-box-shadow: 0px 0px 36px 62px rgba(255,255,255,0.89) inset;
+-moz-box-shadow: 0px 0px 36px 62px rgba(255,255,255,0.89) inset;
 }
 
 .pet-card.active {
@@ -85,7 +87,7 @@ onMounted(() => {
 
 .pet-lost {
   text-transform: uppercase;
-  font-size: clamp(4.2rem, 5vw + 1.5rem, 15.25rem);  
+  font-size: clamp(4.2rem, 5vw + 1.5rem, 15.25rem);
   font-weight: 900;
   color: red;
   opacity: 0.4;

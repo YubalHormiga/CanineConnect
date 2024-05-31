@@ -15,42 +15,11 @@ const { logoutUser } = authStore;
 
 <template>
   <header class="header">
-    <!-- Contenido dependiendo del estado de autenticación -->
-    <div class="welcome" v-if="isLoggedIn && route.name !== 'login'">
-      <!-- <div class="welcome-content">
-        Bienvenid@ <span>{{ userData?.displayName ?? "Usuario" }}</span>
-      </div> -->
-      <!-- Enlace para cerrar sesión -->
-      <!-- <div class="logout-link">
-        <router-link
-          class="logoutUser"
-          @click="logoutUser"
-          :to="{ name: 'home' }"
-          >Cerrar Sesión</router-link
-        >
-      </div> -->
-    </div>
-    <div
-      class="login-form"
-      v-else-if="route.name !== 'login' && route.name !== 'register'"
-    >
-      <div class="login-container">
-        <!-- Enlace para ir a la página de inicio de sesión -->
-        <!-- <router-link :to="{ name: 'login' }" class="login-link">
-          <div class="identity"> -->
-            <!-- Texto de identificación -->
-            <!-- <p class="identify-text">Inicia Sesión o Regístrate</p> -->
-            <!-- Icono de usuario -->
-          <!-- </div>
-        </router-link> -->
-      </div>
-    </div>
     <!-- Nombre del sitio -->
     <div class="site-name">
       <h1 class="name">CanineConnect</h1>
       <h2 class="neighborhood">Sant Martí</h2>
     </div>
-    <!-- Navegación principal -->
   </header>
 </template>
 
@@ -72,42 +41,11 @@ const { logoutUser } = authStore;
   padding: 2rem; /* Añade un padding para mejorar el espacio interno */
 }
 
-/* Estilos por defecto para centrar el contenedor */
-.login-container {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  margin: 2rem auto;
-}
-
-/* Ajusta la posición en pantallas más grandes */
-@media (min-width: 767px) {
-  .login-container {
-    top: 0;
-    right: 0;
-    transform: none;
-    margin: 0;
-    margin-right: 0.5rem;
-  }
-}
-
-/* Estilos para el botón de inicio de sesión */
-.login-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 3px;
-  text-decoration: none;
-}
-
 /* Estilos para el bloque de identificación */
 .identity {
   width: 20rem;
   text-align: center;
 }
-
 /* Estilos para el texto de identificación */
 .identify-text {
   letter-spacing: 0.3px;
@@ -120,46 +58,6 @@ const { logoutUser } = authStore;
   font-size: clamp(4.5rem, 4vw + 1.5rem, 13.25rem);
   margin: 0;
 }
-
-/* Estilos para bienvenida */
-.welcome {
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-  margin: 0.5rem;
-  text-align: center;
-  border-radius: 3px;
-  color: #333;
-  padding: 0.5rem;
-}
-@media (min-width: 767px) {
-  .welcome {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-  }
-}
-
-.welcome span {
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.site-name {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-@media (min-width: 767px) {
-  .site-name {
-    display: flex;
-    flex-direction: row;
-    gap: 4rem;
-    align-items: baseline;
-  }
-}
-
 .neighborhood {
   font-size: clamp(0.5rem, 4vw + 1.5rem, 5.25rem);
   margin: 0;
@@ -168,36 +66,5 @@ const { logoutUser } = authStore;
   font-weight: 900;
   font-style: normal;
   margin: 0;
-}
-
-/* Estilos para la navegación principal */
-.navigation {
-  padding: 1rem;
-  margin: 1rem auto;
-}
-
-/* Estilos para el mensaje de bienvenida */
-.welcome-message {
-  margin: 2rem;
-  text-align: center;
-  font-weight: 700;
-}
-.logoutUser {
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-.logoutUser:hover {
-  text-decoration: none;
-  padding: 1rem 2rem;
-  border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-.welcome-content {
-  padding: 0.5rem 2rem;
-  border-radius: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 1rem;
 }
 </style>

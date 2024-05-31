@@ -80,6 +80,7 @@ const router = createRouter({
       path: "/sebusca",
       name: "lost-dogs",
       component: () => import("../views/LostDogs/LostAndFoundDogsView.vue"),
+      meta: { requiresAuth: true },
     },
     {
       path: "/sebusca/encontrados",

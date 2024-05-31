@@ -33,7 +33,7 @@ const toggleMenu = () => {
 
 // Función para cerrar el menú al hacer clic fuera de él
 const closeMenu = (event) => {
-  if (!event.target.closest('.navigation')) {
+  if (!event.target.closest(".navigation")) {
     isMenuOpen.value = false;
   }
 };
@@ -105,6 +105,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.5rem
 }
 
 /* Navegación */
@@ -133,6 +134,7 @@ onBeforeUnmount(() => {
 
 .right-section {
   justify-content: flex-end;
+  padding-right: 1rem;
 }
 
 .welcome-content,
