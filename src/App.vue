@@ -7,10 +7,12 @@ import MainNavigation from "./share/MainNavigation.vue";
 
 <template>
  <div class="wrapper">
+  <div class="image">
    <MainNavigation />
     <Header />
     <div class="navigation container">
     </div>
+  </div>
     <div class="router-container">
       <div class="container">
         <RouterView />
@@ -21,6 +23,13 @@ import MainNavigation from "./share/MainNavigation.vue";
 </template>
 
 <style scoped>
+.image{
+  background-image: url("/images/dogs.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 33%;
+
+}
 .wrapper {
   display: flex;
   flex-direction: column;

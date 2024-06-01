@@ -5,8 +5,8 @@ import { useAuthStore } from "@/stores/authStore";
 
 const authStore = useAuthStore();
 const { login } = authStore;
-const email = ref("");
-const password = ref("");
+const email = ref("correo@correo.com");
+const password = ref("123123123");
 
 
 const submitForm = async () => {

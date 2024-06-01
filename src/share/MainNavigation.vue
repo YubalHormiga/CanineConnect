@@ -48,7 +48,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="nav-container">
+  <div class="nav-container" :class="{ open: isMenuOpen }">
     <nav class="navigation">
       <!-- Sección izquierda: Menú hamburguesa -->
       <div class="left-section">
@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
       <!-- Sección derecha: Bienvenida y cierre de sesión -->
       <div class="center-section" v-if="isLoggedIn && route.name !== 'login'">
         <div class="welcome-content">
-          Bienvenid@ <span>{{ userData?.displayName ?? "Usuario" }}</span>
+         <span>{{ userData?.displayName ?? "Usuario" }}</span>
         </div>
       </div>
       <div class="right-section">
@@ -105,7 +105,10 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem
+  padding: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
 }
 
 /* Navegación */
@@ -124,6 +127,7 @@ onBeforeUnmount(() => {
 .right-section {
   display: flex;
   align-items: center;
+  margin-left: 0.3rem
 }
 
 .center-section {
@@ -158,13 +162,13 @@ onBeforeUnmount(() => {
 .hamburger-menu .bar {
   width: 30px;
   height: 3px;
-  background-color: #506a85;
-  margin: 4px 0 4px 2px;
+  background-color: #ffffff;
+  margin: 4px 0;
   transition: 0.4s;
 }
 
 .hamburger-menu:hover .bar {
-  background-color: rgba(184, 89, 89, 0.7);
+  background-color: rgb(228, 227, 227);
 }
 
 /* Elementos de navegación */
@@ -172,6 +176,7 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  padding: 0.5rem
 }
 
 .nav-item {
@@ -180,9 +185,10 @@ onBeforeUnmount(() => {
 
 .nav-link {
   text-decoration: none;
-  color: #333;
+  color: rgba(255, 255, 255, 0.9);
   padding: 1rem;
 }
+
 
 .active-link {
   color: rgba(184, 89, 89, 0.7);
@@ -200,7 +206,7 @@ onBeforeUnmount(() => {
     top: 100%;
     left: 0;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     display: none;
     transition: max-height 0.3s ease;
@@ -215,9 +221,8 @@ onBeforeUnmount(() => {
 
   .nav-item {
     width: 100%;
-    text-align: left;
+    text-align: center;
     padding: 1rem;
-    border-bottom: 1px solid #ccc;
   }
 
   .left-section,
@@ -264,26 +269,32 @@ onBeforeUnmount(() => {
 /* Estilos para el enlace de inicio de sesión */
 .login-link {
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
+  text-align: center;
 }
 
 .login-link:hover {
   text-decoration: underline;
-  color: rgba(184, 89, 89, 0.7);
 }
 
 .identify-text {
   margin: 0 2rem 0 0;
+  text-align: center;
 }
 
 /* Estilos para el enlace de cerrar sesión */
 .logoutUser {
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
+  text-align: center;
 }
 
 .logoutUser:hover {
   text-decoration: underline;
-  color: rgba(184, 89, 89, 0.7);
+}
+
+.welcome-content {
+  color: #ffffff;
+  text-align: center;
 }
 </style>

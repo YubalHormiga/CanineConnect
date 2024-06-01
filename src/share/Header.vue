@@ -26,10 +26,7 @@ const { logoutUser } = authStore;
 <style scoped class="header-styles">
 /* Estilos para el encabezado */
 .header {
-  background-image: url("/images/dogs.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: 50% 33%;
+
   color: white;
   display: flex;
   flex-direction: column;
