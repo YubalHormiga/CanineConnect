@@ -6,13 +6,12 @@ import MainNavigation from "./share/MainNavigation.vue";
 </script>
 
 <template>
- <div class="wrapper">
-  <div class="image">
-   <MainNavigation />
-    <Header />
-    <div class="navigation container">
+  <div class="wrapper">
+    <div class="image">
+      <MainNavigation />
+      <Header />
+      <div class="navigation container"></div>
     </div>
-  </div>
     <div class="router-container">
       <div class="container">
         <RouterView />
@@ -23,12 +22,11 @@ import MainNavigation from "./share/MainNavigation.vue";
 </template>
 
 <style scoped>
-.image{
+.image {
   background-image: url("/images/dogs.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 33%;
-
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 33%;
 }
 .wrapper {
   display: flex;
@@ -38,7 +36,7 @@ import MainNavigation from "./share/MainNavigation.vue";
 
 .router-container {
   flex: 1;
-  margin-bottom: 1rem; 
+  margin-bottom: 1rem;
 }
 
 .container {
@@ -52,13 +50,11 @@ import MainNavigation from "./share/MainNavigation.vue";
   }
 } */
 .navigation {
-  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 3px;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease;
-
 }
 </style>
