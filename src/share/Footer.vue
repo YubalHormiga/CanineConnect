@@ -41,6 +41,8 @@ import { RouterLink } from "vue-router";
 .footer-text {
   margin: 0;
   text-align: center;
+  color: rgb(134, 134, 134);
+
 }
 
 .footer-links {
@@ -54,6 +56,7 @@ import { RouterLink } from "vue-router";
 .footer-links a {
   text-decoration: none;
   color: rgb(134, 134, 134);
+
 }
 
 .footer-links a:hover {

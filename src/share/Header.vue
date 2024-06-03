@@ -22,4 +22,31 @@
   height: auto;
   padding: 2rem;
 }
+.name {
+  font-size: clamp(4.5rem, 4vw + 1.5rem, 13.25rem);
+  margin: 0;
+}
+.site-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 640px) {
+  .site-name {
+    display: flex;
+    flex-direction: row;
+    gap: 4rem;
+    align-items: baseline;
+  }
+}
+
+.neighborhood {
+  font-size: clamp(0.5rem, 4vw + 1.5rem, 5.25rem);
+  margin: 0;
+  text-align: center;
+  font-family: "Whisper", cursive;
+  font-weight: 900;
+  font-style: normal;
+  margin: 0;
+}
 </style>
