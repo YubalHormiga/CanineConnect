@@ -1,9 +1,9 @@
-<script setup></script>
-
+<!-- InspiringStoriesSectionView OK -->
 <template>
   <section class="inspiring-stories-section">
-    <h2 class="stories-heading">Historias inspiradoras <span>en Construcción</span> </h2>
+    <h2 class="stories-heading">Historias inspiradoras <span>en Construcción</span></h2>
     <ul class="stories-list">
+      <!-- Cada elemento de la lista representa una historia inspiradora -->
       <li class="story-item">
         <a href="#" class="story-link">
           <img
@@ -40,6 +40,7 @@
     </ul>
   </section>
 </template>
+
 <style scoped>
 .story-item {
   list-style: none;
@@ -50,7 +51,7 @@
 .story-image {
   width: 10rem;
 }
-span{
+span {
   color: red;
 }
 </style>

@@ -1,4 +1,6 @@
+<!-- HomeView OK -->
 <script setup>
+// Importamos los componentes
 import AboutSectionView from "./AboutSectionView.vue";
 import InspiringStoriesSectionView from "./InspiringStoriesSectionView.vue";
 import CallToActionSection from "./CallToActionSection.vue";
@@ -7,15 +9,14 @@ import MissingDogView from "./MissingDogView.vue";
 
 <template>
   <main class="main">
-      <MissingDogView />
-      <AboutSectionView />
+    <!-- Componentes incluidos en el orden requerido -->
+    <MissingDogView />
+    <AboutSectionView />
     <InspiringStoriesSectionView />
     <CallToActionSection />
   </main>
 </template>
+
 <style scoped>
-.main{
-  padding: 1rem
-}
 
 </style>

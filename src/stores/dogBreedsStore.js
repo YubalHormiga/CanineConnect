@@ -1,9 +1,9 @@
-/* useDogBreedsSore*/
+/* useDogBreedsStore */
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { fetchData } from "@/api/DogsAPI.js"; 
 
-export const useDogBreedsSore = defineStore("dogs", () => {
+export const useDogBreedsStore  = defineStore("dogs", () => {
   const dogBreedsData = ref([]);
 
   const fetchDogBreedsData = async () => {

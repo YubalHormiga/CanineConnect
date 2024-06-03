@@ -37,8 +37,9 @@ const chatRules = [
 
 <template>
   <div class="chat-container">
+    <!-- Sección de Normas del Chat -->
     <div class="chat-rules-container">
-      <h2 class="chat-rules-title">Normas del Chat</h2>
+      <h1 class="chat-rules-title">Normas del Chat</h1>
       <ol class="chat-rules-list">
         <li
           v-for="(chatRule, index) in chatRules"
@@ -47,10 +48,10 @@ const chatRules = [
         >
           <span class="chat-rule-title">{{ chatRule.title }}</span>
           <span class="chat-rule-description"> {{ chatRule.description }}</span>
-         
         </li>
       </ol>
     </div>
+    <!-- Sección de Mensajes del Chat -->
     <div class="chat-messages-container">
       <ChatMessagesView />
     </div>
@@ -58,34 +59,44 @@ const chatRules = [
 </template>
 
 <style scoped>
+/* Contenedor principal del chat */
 .chat-container {
   padding: 1rem;
 }
 
+/* Contenedor de las normas del chat */
 .chat-rules-container {
   margin-bottom: 1rem;
 }
 
+/* Título de las normas del chat */
 .chat-rules-title {
   text-align: center;
   margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
+/* Lista de normas del chat */
 .chat-rules-list {
-  list-style-type: none;
-  padding-left: 0;
+  list-style-type: decimal;
+  padding-left: 1.5rem;
 }
 
+/* Elemento individual de las normas del chat */
 .chat-rule-item {
   margin-bottom: 1rem;
 }
 
+/* Título de cada norma del chat */
 .chat-rule-title {
   font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
+/* Contenedor de los mensajes del chat */
 .chat-messages-container {
   margin-top: 1rem;
 }
-
 </style>

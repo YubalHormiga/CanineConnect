@@ -1,3 +1,4 @@
+<!-- LostAndFoundView OK -->
 <script setup>
 import Link from "@/components/Link.vue";
 import FoundItemCard from "./FoundItemCardView.vue";
@@ -51,12 +52,12 @@ const items = useItemsStore();
           <li class="step-item">
             <span class="step-highlight">Mantén el Anuncio:</span> La persona que subió el objeto encontrado será responsable de eliminar el anuncio una vez que se encuentre el dueño. Si no se elimina, el anuncio será borrado automáticamente en el plazo de 7 días.
           </li>
-          <div class="report-link-container">
-            <Link @click="" to="found-items" class="report-link">
-              Reportar Objeto Encontrado
-            </Link>
-          </div>
         </ol>
+        <div class="report-link-container">
+          <Link to="found-items" class="report-link">
+            Reportar Objeto Encontrado
+          </Link>
+        </div>
       </section>
     </section>
     <p v-if="items.noResults">No han reportado ningún artículo</p>
@@ -101,12 +102,11 @@ const items = useItemsStore();
 
 .steps-list {
   list-style: none;
-  padding: 0
+  padding: 0;
 }
 
 .step-highlight {
   font-weight: bold;
-  
 }
 
 /* Estilos para la sección de objetos encontrados */
@@ -121,8 +121,8 @@ const items = useItemsStore();
   list-style: none;
   padding: 0;
   display: flex;
-  flex-wrap: wrap; 
-  gap: 1rem; 
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .report-link-container {

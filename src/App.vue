@@ -8,7 +8,7 @@ import MainNavigation from "./share/MainNavigation.vue";
 <template>
   <div class="wrapper">
     <div class="image">
-      <MainNavigation />
+      <MainNavigation/>
       <Header />
       <div class="navigation container"></div>
     </div>
@@ -41,20 +41,14 @@ import MainNavigation from "./share/MainNavigation.vue";
 
 .container {
   text-align: justify;
+  padding: 2rem
 }
-/* @media (min-width: 767px) {
+@media (min-width: 767px) {
   .container {
     max-width: 120rem;
     margin: 0 auto;
-    padding: 2rem
+ 
   }
-} */
-.navigation {
-  border-radius: 3px;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: all 0.3s ease;
 }
+
 </style>

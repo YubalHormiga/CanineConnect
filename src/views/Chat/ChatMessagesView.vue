@@ -1,3 +1,4 @@
+// ChatMessagesView OK
 <script setup>
 // Importamos las funciones y referencias necesarias desde Vue
 import { ref, inject, computed } from "vue";
@@ -66,58 +67,57 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="chat-container">
-    <div class="messages-section">
+  <section class="chat-container">
+    <section class="messages-section">
       <h3>Mensajes:</h3>
       <ul class="messages-list">
-        <div>
-          <li
-            v-for="(message, index) in messagesStore.messagesCollection"
-            class="message-item"
-            :class="{
-              'blue-message': index % 2 === 0,
-              'green-message': index % 2 !== 0,
-            }"
-            :key="message.id"
-          >
-            <div>
-              <span class="message-author">{{ message.displayName }}: </span>
-              {{ message.text }} -
-              <span class="message-timestamp">{{
-                new Date(message.timestamp.seconds * 1000).toLocaleString()
-              }}</span>
-            </div>
-            <div v-if="message.uid === authStore.userData.uid">
-              <button
-                type="button"
-                @click="messagesStore.deleteMessage(message.id)"
+        <article
+          v-for="(message, index) in messagesStore.messagesCollection"
+          class="message-item"
+          :class="{
+            'blue-message': index % 2 === 0,
+            'green-message': index % 2 !== 0,
+          }"
+          :key="message.id"
+        >
+          <div>
+            <span class="message-author">{{ message.displayName }}: </span>
+            {{ message.text }} -
+            <span class="message-timestamp">{{
+              new Date(message.timestamp.seconds * 1000).toLocaleString()
+            }}</span>
+          </div>
+          <div v-if="message.uid === authStore.userData.uid">
+            <button
+              type="button"
+              @click="messagesStore.deleteMessage(message.id)"
+              aria-label="Eliminar mensaje"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-trash"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="#ff2825"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-trash"
-                  width="28"
-                  height="28"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ff2825"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M4 7l16 0" />
-                  <path d="M10 11l0 6" />
-                  <path d="M14 11l0 6" />
-                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                </svg>
-              </button>
-            </div>
-          </li>
-        </div>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M4 7l16 0" />
+                <path d="M10 11l0 6" />
+                <path d="M14 11l0 6" />
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+              </svg>
+            </button>
+          </div>
+        </article>
       </ul>
       <p class="no-messages" v-if="messagesStore.noResults">No hay mensajes</p>
-    </div>
+    </section>
     <div class="user-info">
       <span>Nombre de usuario: </span>{{ authStore.userData.displayName }}
     </div>
@@ -138,7 +138,7 @@ const handleSubmit = async () => {
         Enviar
       </button>
     </form>
-  </div>
+  </section>
 </template>
 
 <style>
@@ -168,7 +168,7 @@ const handleSubmit = async () => {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-family: 'Roboto', sans-serif;;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   resize: none;
 }
@@ -222,7 +222,6 @@ const handleSubmit = async () => {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-
   border-radius: 8px;
   border: 1px solid #b2ebf2;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -233,6 +232,7 @@ const handleSubmit = async () => {
   background-color: #d1e7fd;
   border: 1px solid #91c7f1;
 }
+
 .green-message {
   background-color: #d4edda;
   border: 1px solid #a3d8b0;
@@ -251,9 +251,11 @@ const handleSubmit = async () => {
   text-align: center;
   color: #666;
 }
+
 button {
   border: none;
   background: none;
   cursor: pointer;
 }
 </style>
+

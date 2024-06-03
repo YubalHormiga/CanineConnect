@@ -1,5 +1,7 @@
+<!-- MissingDogView OK -->
 <template>
   <div class="pet-carousel">
+    <!-- Iteración sobre las imágenes para crear las tarjetas de mascotas -->
     <div
       class="pet-card"
       :class="{ active: index === currentIndex }"
@@ -15,8 +17,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted } from "vue"; 
 
+// Lista de imágenes para el carrusel
 const images = ref([
   "/images/dog1.jpg",
   "/images/dog2.jpg",
@@ -24,8 +27,9 @@ const images = ref([
   // Agrega aquí todas tus imágenes
 ]);
 
-const currentIndex = ref(0);
+const currentIndex = ref(0); // Índice de la imagen actual
 
+// Función para avanzar a la siguiente imagen
 const nextImage = () => {
   currentIndex.value++;
   if (currentIndex.value >= images.value.length) {
@@ -33,6 +37,7 @@ const nextImage = () => {
   }
 };
 
+// Función para retroceder a la imagen anterior (por si se necesita en el futuro)
 const prevImage = () => {
   currentIndex.value--;
   if (currentIndex.value < 0) {
@@ -40,6 +45,7 @@ const prevImage = () => {
   }
 };
 
+// Ciclo de vida del componente para iniciar el carrusel
 onMounted(() => {
   setInterval(() => {
     nextImage();
@@ -48,6 +54,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* Estilo del contenedor del carrusel */
 .pet-carousel {
   position: relative;
   max-width: 100%;
@@ -55,6 +62,7 @@ onMounted(() => {
   overflow: hidden;
 }
 
+/* Estilo de las tarjetas de mascotas */
 .pet-card {
   position: absolute;
   top: 0;
@@ -65,15 +73,17 @@ onMounted(() => {
   background-repeat: no-repeat;
   background-position: center;
   display: none;
-  box-shadow: 0px 0px 36px 62px rgba(255,255,255,0.89) inset;
--webkit-box-shadow: 0px 0px 36px 62px rgba(255,255,255,0.89) inset;
--moz-box-shadow: 0px 0px 36px 62px rgba(255,255,255,0.89) inset;
+  box-shadow: 0px 0px 36px 62px rgba(255, 255, 255, 0.89) inset;
+  -webkit-box-shadow: 0px 0px 36px 62px rgba(255, 255, 255, 0.89) inset;
+  -moz-box-shadow: 0px 0px 36px 62px rgba(255, 255, 255, 0.89) inset;
 }
 
+/* Mostrar la tarjeta activa */
 .pet-card.active {
   display: block;
 }
 
+/* Estilo de la descripción de las mascotas */
 .pet-description {
   position: absolute;
   top: 0;
@@ -85,6 +95,7 @@ onMounted(() => {
   align-items: center;
 }
 
+/* Estilo del texto 'Se Busca' */
 .pet-lost {
   text-transform: uppercase;
   font-size: clamp(4.2rem, 5vw + 1.5rem, 15.25rem);

@@ -1,3 +1,4 @@
+<!-- FoundItemCardView OK -->
 <script setup>
 /* Importaciones de bibliotecas externas */
 import { RouterLink } from "vue-router";
@@ -20,9 +21,7 @@ const items = useItemsStore();
 const authStore = useAuthStore();
 
 /* Propiedad computada para verificar si el usuario actual es el propietario del objeto */
-const isOwner = computed(() => {
-  return props.item.userId === authStore.userData?.uid; 
-});
+const isOwner = computed(() => props.item.userId === authStore.userData?.uid);
 
 /* Estado reactivo para controlar la visibilidad de la información de contacto */
 const showContactInfo = ref(false);
@@ -33,9 +32,7 @@ const toggleContactInfo = () => {
 };
 
 /* Propiedad computada para cambiar dinámicamente el texto del botón */
-const buttonText = computed(() => {
-  return showContactInfo.value ? 'Cerrar Contacto' : 'Reclamar';
-});
+const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : 'Reclamar'));
 </script>
 
 <template>

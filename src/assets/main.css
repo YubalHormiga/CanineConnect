@@ -18,9 +18,8 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
- 
-  font-size: 16px; /* Tamaño de fuente base */
+  background-color:#fff;
+  font-size: 16px; 
   line-height: 1.6;
 }
 h1, h2, h3, h4, h5, h6 {

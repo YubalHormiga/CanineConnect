@@ -1,3 +1,4 @@
+<!-- EditFoundItemView OK -->
 <script setup>
 /* Importaciones de bibliotecas externas */
 import { reactive, watch } from "vue";
@@ -13,7 +14,7 @@ import Spinner from "@/components/Spinner.vue";
 import { useItemsStore } from "@/stores/itemsStore.js";
 
 /* Importaciones de composables */
-import useImage from "@/composables/useImage.js"; // Importamos el composable para el manejo de imágenes
+import useImage from "@/composables/useImage.js";
 
 // Usamos el composable para el manejo de imágenes y extraemos las propiedades necesarias
 const { url, onFileChange, isImageUploaded, spinner } = useImage();
@@ -47,8 +48,9 @@ watch(item, (item) => {
   if (!item) {
     // Si el item no existe, redirigimos a la página de "lost-items"
     router.push({ name: "lost-items" });
+  } else {
+    Object.assign(formData, item); // Actualizamos formData con los datos del item
   }
-  Object.assign(formData, item); // Actualizamos formData con los datos del item
 });
 
 // Función para manejar el envío del formulario
@@ -169,7 +171,7 @@ const handleSubmit = async (data) => {
           <p class="image">Imagen Actual:</p>
           <img
             :src="formData.image"
-            :alt="'Imagen de' + formData.image"
+            :alt="'Imagen de ' + formData.image"
             class="image"
           />
         </div>
@@ -188,7 +190,7 @@ const handleSubmit = async (data) => {
           name="observations"
           placeholder="Observaciones adicionales"
           :help="`${formData.observations.length} / 120`"
-          validation="required | length: 0.120"
+          validation="required | length:0,120"
           :validation-messages="{
             required: 'Las observaciones son obligatorias',
             length: 'La descripción no puede tener más de 120 caracteres',
@@ -223,6 +225,7 @@ const handleSubmit = async (data) => {
   max-width: 20rem; /* Ajusta el ancho de la imagen */
   max-height: 20rem; /* Limita la altura máxima de la imagen */
 }
+
 /* Nota de agradecimiento */
 .gratitude-note {
   text-align: center;

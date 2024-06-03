@@ -1,4 +1,4 @@
-<!-- MainNavigation.vue -->
+<!-- MainNavigation.vue   OK -->
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { RouterLink } from "vue-router";
@@ -52,7 +52,11 @@ onBeforeUnmount(() => {
     <nav class="navigation">
       <!-- Sección izquierda: Menú hamburguesa -->
       <div class="left-section">
-        <div class="hamburger-menu" @click="toggleMenu">
+        <div
+          class="hamburger-menu"
+          @click="toggleMenu"
+          aria-label="Toggle Menu"
+        >
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -72,7 +76,7 @@ onBeforeUnmount(() => {
       <!-- Sección derecha: Bienvenida y cierre de sesión -->
       <div class="center-section" v-if="isLoggedIn && route.name !== 'login'">
         <div class="welcome-content">
-         <span>{{ userData?.displayName ?? "Usuario" }}</span>
+          <span>{{ userData?.displayName ?? "Usuario" }}</span>
         </div>
       </div>
       <div class="right-section">
@@ -127,7 +131,7 @@ onBeforeUnmount(() => {
 .right-section {
   display: flex;
   align-items: center;
-  margin-left: 0.3rem
+  margin-left: 0.3rem;
 }
 
 .center-section {
@@ -138,7 +142,12 @@ onBeforeUnmount(() => {
 
 .right-section {
   justify-content: flex-end;
-  padding-right: 1rem;
+}
+@media (min-width: 640px) {
+  .right-section {
+    justify-content: flex-end;
+    padding-right: 1rem;
+  }
 }
 
 .welcome-content,
@@ -167,16 +176,12 @@ onBeforeUnmount(() => {
   transition: 0.4s;
 }
 
-.hamburger-menu:hover .bar {
-  background-color: rgb(228, 227, 227);
-}
-
 /* Elementos de navegación */
 .nav-items {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0.5rem
+  padding: 0.5rem;
 }
 
 .nav-item {
@@ -188,7 +193,6 @@ onBeforeUnmount(() => {
   color: rgba(255, 255, 255, 0.9);
   padding: 1rem;
 }
-
 
 .active-link {
   color: rgba(184, 89, 89, 0.7);
@@ -216,7 +220,7 @@ onBeforeUnmount(() => {
 
   .nav-items.open {
     display: flex;
-    max-height: 500px; /* Valor arbitrario grande para permitir el contenido */
+    max-height: 500px;
   }
 
   .nav-item {
@@ -278,7 +282,7 @@ onBeforeUnmount(() => {
 }
 
 .identify-text {
-  margin: 0 2rem 0 0;
+  margin: 0;
   text-align: center;
 }
 

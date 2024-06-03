@@ -1,3 +1,4 @@
+<!-- ReportFoundItemView OK -->
 <script setup>
 /* Importaciones de bibliotecas externas */
 import { reactive, watch } from "vue";
