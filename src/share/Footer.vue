@@ -25,7 +25,6 @@ import { RouterLink } from "vue-router";
 .footer-container {
   display: flex;
   flex-direction: column;
-  color: rgb(134, 134, 134);
   padding: 1rem;
   background-color: #f8f8f8;
 }
