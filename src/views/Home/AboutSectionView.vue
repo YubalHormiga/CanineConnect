@@ -103,7 +103,6 @@ const valueList = [
 .about-section {
   text-align: justify;
   padding: 1rem;
-  background-color: #f0f8ff;
   border-radius: 8px;
   font-family: Arial, sans-serif;
 }
