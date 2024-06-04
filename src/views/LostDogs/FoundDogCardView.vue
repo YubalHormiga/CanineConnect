@@ -1,23 +1,33 @@
 <script setup>
-import { RouterLink } from 'vue-router';
+import { computed } from "vue";
+import { RouterLink, useRoute } from "vue-router";
+import { useLostDogsStore } from "@/stores/lostDogsStore";
+import { useAuthStore } from "@/stores/authStore";
 
-
-
+const route = useRoute();
 const props = defineProps({
   lostDog: {
     type: Object,
     required: true,
   },
 });
+const lostDogsStore = useLostDogsStore();
+const authStore = useAuthStore();
+const isOwner = computed(() => {
+  return props.lostDog.userId === authStore.userData.uid;
+});
 </script>
 
 <template>
   <div class="card">
-    
     <!-- Contenedor de la imagen del objeto -->
-    <!-- <div class="card-image-container">
-      <img :src="item.image" alt="Imagen del objeto perdido" class="card-img" />
-    </div> -->
+    <div class="card-image-container">
+      <img
+        :src="lostDog.image"
+        alt="Imagen del objeto perdido"
+        class="card-img"
+      />
+    </div>
     <!-- Contenido de la tarjeta -->
     <div class="card-content">
       <h3 class="card-title">
@@ -28,35 +38,22 @@ const props = defineProps({
         <p class="card-text"><span>Email:</span> {{ lostDog.email }}</p>
         <p class="card-text"><span>Teléfono:</span> {{ lostDog.phone }}</p>
       </div>
-      <!-- Descripción del objeto -->
-      <!-- <div class="card-section">
-        <span>Descripción:</span>
-        <div class="card-text-content">{{ item.description }}</div>
-      </div> -->
       <!-- Ubicación del objeto -->
       <div class="card-section">
-        <span>Ubicación:</span>
+        <span>Ubicación y detalles:</span>
         <div class="card-text-content">{{ lostDog.location }}</div>
       </div>
       <!-- Fecha en la que se encontró el objeto -->
       <p class="card-text"><span>Fecha:</span> {{ lostDog.date }}</p>
       <!-- Observaciones adicionales -->
-      <!-- <div class="card-section">
-        <span>Observaciones:</span>
-        <div class="card-text-content">{{ item.observations }}</div>
-      </div> -->
-      <!-- Botón para reclamar o cerrar contacto -->
-      <div class="button-container">
-        <button  class="claim-button">
-         
-        </button>
-      </div>
     </div>
     <!-- Encabezado de la tarjeta con botones de editar y eliminar si el usuario es el propietario -->
-    <div class="card-header" >
+    <div v-if="isOwner" class="card-header">
       <!-- Botón para editar el objeto -->
-      <!-- <div class="button-container">
-        <router-link >
+      <div class="button-container">
+        <router-link
+          :to="{ name: 'edit-lostDog-found', params: { id: lostDog.id } }"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-pencil"
@@ -76,8 +73,8 @@ const props = defineProps({
         </router-link>
       </div>
       <!-- Botón para eliminar el objeto -->
-      <!-- <div class="button-container">
-        <button type="button"">
+      <div class="button-container">
+        <button type="button" @click="lostDogsStore.deleteLostDog(lostDog.id)">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-trash"
@@ -97,8 +94,8 @@ const props = defineProps({
             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
           </svg>
-        </button> 
-      </div> -->
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -115,6 +112,7 @@ const props = defineProps({
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   margin: 0 auto;
+  padding: 1rem;
 }
 
 .card:hover {
@@ -146,7 +144,8 @@ const props = defineProps({
   color: #333;
 }
 
-.card-text {
+.card-text,
+.card-title span {
   margin: 0 0 8px;
   color: #666;
 }
@@ -205,6 +204,3 @@ button {
   cursor: pointer;
 }
 </style>
-
-
-

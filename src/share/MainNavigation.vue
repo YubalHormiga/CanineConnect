@@ -9,13 +9,13 @@ import { storeToRefs } from "pinia";
 // Definición de los elementos de navegación
 const navItems = [
   { text: "Inicio", to: "/" },
+  { text: "Se Busca", to: { name: "lost-dogs" } },
+  { text: "Objetos Perdidos", to: { name: "lost-items" } },
   { text: "Información", to: { name: "care" } },
   { text: "Adopción", to: { name: "adoption" } },
   { text: "Recursos", to: { name: "resources" } },
-  { text: "Blog", to: { name: "blog" } },
-  { text: "Objetos Perdidos", to: { name: "lost-items" } },
+  // { text: "Blog", to: { name: "blog" } },
   { text: "Donar", to: { name: "donate" } },
-  { text: "Se Busca", to: { name: "lost-dogs" } },
   { text: "Chat", to: { name: "chat" } },
 ];
 
@@ -111,15 +111,16 @@ onBeforeUnmount(() => {
   align-items: center;
   padding: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   transition: background-color 0.3s ease;
 }
 
 /* Navegación */
 .navigation {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
   z-index: 10000;
@@ -189,6 +190,7 @@ onBeforeUnmount(() => {
 }
 
 .nav-link {
+  justify-content: center;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.9);
   padding: 1rem;
@@ -210,7 +212,7 @@ onBeforeUnmount(() => {
     top: 100%;
     left: 0;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     width: 100%;
     display: none;
     transition: max-height 0.3s ease;

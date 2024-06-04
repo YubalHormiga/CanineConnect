@@ -13,7 +13,11 @@ import {
   
 } from "firebase/firestore";
 import { ref as storageRef, deleteObject } from "firebase/storage";
+import { inject } from "vue";
+import useToastQuestion from "@/composables/UseToastQuestion";
 
+useToastQuestion()
+const toast = inject("toast");
 /* Definición de la tienda (store) de items */
 export const useItemsStore = defineStore("itemsStore", () => {
   const db = useFirestore(); // Obtenemos una referencia a Firestore

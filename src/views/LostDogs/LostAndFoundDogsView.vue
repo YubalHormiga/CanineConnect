@@ -2,13 +2,10 @@
 import Link from "@/components/Link.vue";
 import FoundDogCardView from "./FoundDogCardView.vue";
 import { useLostDogsStore } from "@/stores/lostDogsStore";
-import UnderConstructionPage from "@/components/UnderConstructionPage.vue";
-UnderConstructionPage
 const lostDogsStore = useLostDogsStore();
 </script>
 
 <template>
- <UnderConstructionPage/> 
   <div class="lostDog-container">
     <h3>Bienvenido a la Sección de Mascota Perdida</h3>
     <p>
@@ -27,7 +24,7 @@ const lostDogsStore = useLostDogsStore();
       <ul class="dog-list">
         <FoundDogCardView
           v-for="lostDog in lostDogsStore.lostDogsCollection"
-          :lostDog = 'lostDog'
+          :lostDog="lostDog"
         />
       </ul>
     </div>

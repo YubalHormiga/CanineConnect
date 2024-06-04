@@ -1,3 +1,4 @@
+<!-- App OK -->
 <script setup>
 import { RouterView } from "vue-router";
 import Header from "../src/share/Header.vue";
@@ -8,9 +9,8 @@ import MainNavigation from "./share/MainNavigation.vue";
 <template>
   <div class="wrapper">
     <div class="image">
-      <MainNavigation/>
+      <MainNavigation class="navagation" />
       <Header />
-      <div class="navigation container"></div>
     </div>
     <div class="router-container">
       <div class="container">
@@ -33,7 +33,11 @@ import MainNavigation from "./share/MainNavigation.vue";
   flex-direction: column;
   min-height: 100vh;
 }
-
+.navagation{
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+}
 .router-container {
   flex: 1;
   margin-bottom: 1rem;
@@ -41,14 +45,11 @@ import MainNavigation from "./share/MainNavigation.vue";
 
 .container {
   text-align: justify;
-  padding: 2rem
 }
 @media (min-width: 767px) {
   .container {
     max-width: 120rem;
     margin: 0 auto;
- 
   }
 }
-
 </style>

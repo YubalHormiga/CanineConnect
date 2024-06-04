@@ -138,6 +138,8 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   margin: 0 auto;
+  padding: 1rem
+
 }
 
 .card:hover {
@@ -169,7 +171,8 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
   color: #333;
 }
 
-.card-text {
+.card-text,
+.card-title span {
   margin: 0 0 8px;
   color: #666;
 }
@@ -189,6 +192,8 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
   white-space: pre-wrap;
   word-wrap: break-word;
   max-height: 100px; /* Altura máxima del contenedor */
+   color: #666;
+
 }
 
 /* Encabezado de la tarjeta */

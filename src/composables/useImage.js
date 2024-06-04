@@ -11,14 +11,14 @@ import { uid } from "uid"; // Importamos uid para generar identificadores único
 
 const spinner = ref(false); // Definimos una referencia reactiva para el spinner
 
-export default function useImage() {
+export default function useImage(directory) {
   const url = ref(""); // Definimos una referencia reactiva para la URL de la imagen
   const storage = useFirebaseStorage(); // Obtenemos una referencia a Firebase Storage
 
   const onFileChange = (e) => {
     const file = e.target.files[0]; // Obtenemos el primer archivo seleccionado
     const filename = uid() + ".jpg"; // Generamos un nombre de archivo único
-    const sRef = storageRef(storage, "/items/" + filename); // Creamos una referencia de almacenamiento en Firebase Storage
+    const sRef = storageRef(storage, directory + filename); // Creamos una referencia de almacenamiento en Firebase Storage
 
     // Subir el archivo
     const uploadTask = uploadBytesResumable(sRef, file); // Iniciamos la subida del archivo
@@ -52,4 +52,3 @@ export default function useImage() {
     spinner, // Estado del spinner
   };
 }
-

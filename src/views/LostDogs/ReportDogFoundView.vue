@@ -1,28 +1,49 @@
 <script setup>
 import { reactive } from "vue";
-import { useLostDogsStore } from "@/stores/lostDogsStore";
-import Link from "@/components/Link.vue";
 import { useRouter } from "vue-router";
+
+import Link from "@/components/Link.vue";
+
+import { useLostDogsStore } from "@/stores/lostDogsStore";
+import { useAuthStore } from "@/stores/authStore.js";
+
+import useImage from "@/composables/useImage";
+import Spinner from "@/components/Spinner.vue";
+
+const { url, onFileChange, isImageUploaded, spinner } = useImage("lostDogs_images");
 
 const router = useRouter();
 
 const lostDogsStore = useLostDogsStore();
+const authStore = useAuthStore();
 
 const formData = reactive({
+  image: "",
   name: "",
   phone: "",
-  email:'',
+  email: "",
   location: "",
   date: "",
 });
 
 const handleSubmit = async (data) => {
+  const { image, ...values } = data;
   try {
-    await lostDogsStore.addLostDog(data);
-    console.log(data);
+    await lostDogsStore.addLostDog({
+      ...values,
+      userId: authStore.userData.uid,
+      image: url.value,
+    });
+
     router.push({ name: "lost-dogs" });
   } catch (error) {
     console.log(error);
+  }
+};
+
+const limitCharacters = (field, maxLength) => {
+  if (formData[field].length >= maxLength) {
+    formData[field] = formData[field].substring(0, maxLength);
   }
 };
 </script>
@@ -52,13 +73,38 @@ const handleSubmit = async (data) => {
   </div>
   <div class="form">
     <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
-      <!-- <FormKit
+      <FormKit
         type="file"
-        label="Añade una imagen"
+        label="Añade una imagen y espera a que se cargue"
         name="image"
         placeholder="Imagen"
-        v-model="formData.image"
-      /> -->
+        validation="required"
+        :validation-messages="{
+          required: 'La imagen es obligatoria',
+        }"
+        @change="onFileChange"
+        v-model.trim="formData.image"
+      />
+      <!-- Spinner y previsualización de la imagen -->
+      <div v-if="spinner" class="spinner">
+        <Spinner />
+      </div>
+      <div v-else-if="isImageUploaded" class="image-container">
+        <img :src="url" alt="Nueva imagen producto" class="image" />
+      </div>
+      <FormKit
+        class="message-input"
+        type="date"
+        label="Fecha del hallazgo"
+        name="date"
+        format="DD MM YY"
+        placeholder="Fecha en que se encontró la mascota"
+        validation="required"
+        :validation-messages="{
+          required: 'La fecha es obligatoria',
+        }"
+        v-model.trim="formData.date"
+      />
       <FormKit
         type="text"
         label="Nombre"
@@ -93,29 +139,21 @@ const handleSubmit = async (data) => {
         v-model.trim="formData.email"
       />
       <FormKit
-        type="text"
-        label="Ubicación"
+        type="textarea"
+        label="Ubicación y detalles"
         name="location"
-        placeholder="Lugar donde se encontró la mascota"
-        validation="required"
+        placeholder="Dónde se encontró y cualquier detalle relevante"
+        :help="`${formData.location.length} / 200`"
+        validation="required | length:0,200"
         :validation-messages="{
-          required: 'La ubicación es Obligatoria',
+          required: 'La ubicación es obligatoria',
+          length: 'La ubicación no puede tener más de 120 caracteres.',
         }"
+        validation-visibility="blur"
         v-model="formData.location"
+        @imput="limitCharacters('location', 200)"
       />
-      <FormKit
-        class="message-input"
-        type="date"
-        label="Fecha del hallazgo"
-        name="date"
-        format="DD MM YY"
-        placeholder="Fecha en que se encontró la mascota"
-        validation="required"
-        :validation-messages="{
-          required: 'La fecha es obligatoria',
-        }"
-        v-model.trim="formData.date"
-      />
+
     </FormKit>
   </div>
 </template>
@@ -143,5 +181,25 @@ const handleSubmit = async (data) => {
   width: 100%; /* Hace que el formulario ocupe todo el ancho disponible */
   margin: 0 auto;
   margin-bottom: 1rem; /* Espaciado entre elementos del formulario */
+}
+
+/* Estilo para el spinner */
+.spinner {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 6rem;
+}
+/* Contenedor para la imagen */
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* Estilo de la imagen */
+.image {
+  max-width: 20rem; /* Ajusta el ancho de la imagen */
+  height: auto; /* Mantiene la proporción de la imagen */
+  max-height: 20rem; /* Limita la altura máxima de la imagen */
 }
 </style>

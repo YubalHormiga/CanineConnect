@@ -69,7 +69,6 @@ const router = createRouter({
       path: "/objetos/editar/:id",
       name: "edit-item-found",
       component: () => import("../views/Items/EditFoundItemView.vue"),
-     
     },
     {
       path: "/donate",
@@ -86,6 +85,11 @@ const router = createRouter({
       path: "/sebusca/encontrados",
       name: "found-dogs",
       component: () => import("../views/LostDogs/ReportDogFoundView.vue"),
+    },
+    {
+      path: "/sebusca/editar/:id",
+      name: "edit-lostDog-found",
+      component: () => import("../views/LostDogs/EditFoundDogView.vue"),
     },
     {
       path: "/chat",

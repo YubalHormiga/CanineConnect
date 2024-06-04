@@ -16,7 +16,7 @@ import { useAuthStore } from "@/stores/authStore";
 import useImage from "@/composables/useImage";
 
 // Usamos el composable para el manejo de imágenes y extraemos las propiedades necesarias
-const { url, onFileChange, isImageUploaded, spinner } = useImage();
+const { url, onFileChange, isImageUploaded, spinner } = useImage("lostItems_images");
 
 // Usamos el store de items y de auth
 const items = useItemsStore();
@@ -90,6 +90,37 @@ const limitCharacters = (field, maxLength) => {
       <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
         <!-- Campos del formulario -->
         <FormKit
+          type="file"
+          label="Añade una imagen del objeto y espera a que se cargue"
+          name="image"
+          placeholder="Imagen"
+          validation="required"
+          :validation-messages="{
+            required: 'La imagen es obligatoria',
+          }"
+          @change="onFileChange"
+          v-model.trim="formData.image"
+        />
+        <!-- Spinner y previsualización de la imagen -->
+        <div v-if="spinner" class="spinner">
+          <Spinner />
+        </div>
+        <div v-else-if="isImageUploaded" class="image-container">
+          <img :src="url" alt="Nueva imagen producto" class="image" />
+        </div>
+        <FormKit
+          type="date"
+          name="date"
+          label="Fecha en la que se encontró"
+          validation="blur"
+          validation-visibility="live"
+          format="DD MM YY"
+          v-model.trim="formData.date"
+          :validation-messages="{
+            required: 'La fecha en la que se encontró es requerida',
+          }"
+        />
+        <FormKit
           type="text"
           label="Nombre"
           name="name"
@@ -152,37 +183,7 @@ const limitCharacters = (field, maxLength) => {
           v-model.trim="formData.location"
           @input="limitCharacters('location', 120)"
         />
-        <FormKit
-          type="date"
-          name="date"
-          label="Fecha en la que se encontró"
-          validation="blur"
-          validation-visibility="live"
-          format="DD MM YY"
-          v-model.trim="formData.date"
-          :validation-messages="{
-            required: 'La fecha en la que se encontró es requerida',
-          }"
-        />
-        <FormKit
-          type="file"
-          label="Añade una imagen del objeto y espera a que se cargue"
-          name="image"
-          placeholder="Imagen"
-          validation="required"
-          :validation-messages="{
-            required: 'La imagen es obligatoria',
-          }"
-          @change="onFileChange"
-          v-model.trim="formData.image"
-        />
-        <!-- Spinner y previsualización de la imagen -->
-        <div v-if="spinner" class="spinner">
-          <Spinner />
-        </div>
-        <div v-else-if="isImageUploaded" class="image-container">
-          <img :src="url" alt="Nueva imagen producto" class="image" />
-        </div>
+
         <FormKit
           type="textarea"
           label="Observaciones adicionales"
