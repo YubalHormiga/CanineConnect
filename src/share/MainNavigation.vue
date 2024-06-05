@@ -9,12 +9,12 @@ import { storeToRefs } from "pinia";
 // Definición de los elementos de navegación
 const navItems = [
   { text: "Inicio", to: "/" },
-  { text: "Se Busca", to: { name: "lost-dogs" } },
+  { text: "Peludos Perdidos", to: { name: "lost-dogs" } },
   { text: "Objetos Perdidos", to: { name: "lost-items" } },
   { text: "Información", to: { name: "care" } },
   { text: "Adopción", to: { name: "adoption" } },
   { text: "Recursos", to: { name: "resources" } },
-  // { text: "Blog", to: { name: "blog" } },
+  { text: "Blog", to: { name: "blog" } },
   { text: "Donar", to: { name: "donate" } },
   { text: "Chat", to: { name: "chat" } },
 ];
@@ -182,10 +182,10 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0.5rem;
 }
 
 .nav-item {
+  display: flex;
   text-align: center;
 }
 
@@ -222,13 +222,12 @@ onBeforeUnmount(() => {
 
   .nav-items.open {
     display: flex;
-    max-height: 500px;
+    max-height: max-content;
   }
 
   .nav-item {
     width: 100%;
     text-align: center;
-    padding: 1rem;
   }
 
   .left-section,

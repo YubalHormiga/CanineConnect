@@ -41,12 +41,13 @@ import MainNavigation from "./share/MainNavigation.vue";
 .router-container {
   flex: 1;
   margin-bottom: 1rem;
+  padding: 1rem
 }
 
 .container {
   text-align: justify;
 }
-@media (min-width: 767px) {
+@media (min-width: 640px) {
   .container {
     max-width: 120rem;
     margin: 0 auto;

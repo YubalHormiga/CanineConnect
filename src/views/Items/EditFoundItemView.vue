@@ -16,6 +16,9 @@ import { useItemsStore } from "@/stores/itemsStore.js";
 /* Importaciones de composables */
 import useImage from "@/composables/useImage.js";
 
+/* Importaciones de helpers */
+import { limitCharacters } from '@/helpers';
+
 // Usamos el composable para el manejo de imágenes y extraemos las propiedades necesarias
 const { url, onFileChange, isImageUploaded, spinner } = useImage();
 
@@ -61,6 +64,11 @@ const handleSubmit = async (data) => {
   } catch (error) {
     console.log(error); // Manejamos cualquier error que ocurra durante la actualización
   }
+};
+
+// Función para manejar la limitación de caracteres
+const handleLimitCharacters = (field, maxLength) => {
+  limitCharacters(formData, field, maxLength);
 };
 </script>
 
@@ -135,6 +143,7 @@ const handleSubmit = async (data) => {
           }"
           validation-visibility="blur"
           v-model.trim="formData.description"
+          @input="handleLimitCharacters('description',120)"
         />
         <FormKit
           type="textarea"
@@ -149,6 +158,8 @@ const handleSubmit = async (data) => {
           }"
           validation-visibility="blur"
           v-model.trim="formData.location"
+          @input="handleLimitCharacters('description',120)"
+
         />
         <FormKit
           type="date"
@@ -195,7 +206,7 @@ const handleSubmit = async (data) => {
             required: 'Las observaciones son obligatorias',
             length: 'La descripción no puede tener más de 120 caracteres',
           }"
-          v-model.number="formData.observations"
+          v-model.trim="formData.observations"
         />
         <!-- Botón de submit -->
         <FormKit type="submit">Guardar Cambios</FormKit>
@@ -222,10 +233,9 @@ const handleSubmit = async (data) => {
 /* Estilo de las imágenes */
 .image {
   font-weight: bold;
-  max-width: 20rem; /* Ajusta el ancho de la imagen */
-  max-height: 20rem; /* Limita la altura máxima de la imagen */
+  max-width: 20rem; 
+  max-height: 20rem; 
 }
-
 /* Nota de agradecimiento */
 .gratitude-note {
   text-align: center;
@@ -234,15 +244,15 @@ const handleSubmit = async (data) => {
 /* Estilo del formulario */
 .form {
   display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  min-height: 50vh; /* Altura mínima para centrar verticalmente */
+  justify-content: center; 
+  align-items: center; 
+  min-height: 50vh; 
 }
 
 .form > * {
-  max-width: 40rem; /* Ancho máximo del formulario */
-  width: 100%; /* Hace que el formulario ocupe todo el ancho disponible */
+  max-width: 40rem; 
+  width: 100%; 
   margin: 0 auto;
-  margin-bottom: 1rem; /* Espaciado entre elementos del formulario */
+  margin-bottom: 1rem; 
 }
 </style>

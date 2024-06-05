@@ -1,18 +1,27 @@
+<!-- FoundDogCardView ok -->
 <script setup>
+/* Importaciones de bibliotecas externas */
 import { computed } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink} from "vue-router";
+
+/* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
 import { useAuthStore } from "@/stores/authStore";
 
-const route = useRoute();
+
+// Definir las propiedades esperadas para el componente
 const props = defineProps({
   lostDog: {
     type: Object,
     required: true,
   },
 });
+
+// Inicializar los stores necesarios
 const lostDogsStore = useLostDogsStore();
 const authStore = useAuthStore();
+
+// Computed property para verificar si el usuario actual es el propietario del perro perdido
 const isOwner = computed(() => {
   return props.lostDog.userId === authStore.userData.uid;
 });
@@ -20,11 +29,11 @@ const isOwner = computed(() => {
 
 <template>
   <div class="card">
-    <!-- Contenedor de la imagen del objeto -->
+    <!-- Contenedor de la imagen del perro perdido -->
     <div class="card-image-container">
       <img
         :src="lostDog.image"
-        alt="Imagen del objeto perdido"
+        :alt="'Imagen de ' + lostDog.name"
         class="card-img"
       />
     </div>
@@ -33,23 +42,22 @@ const isOwner = computed(() => {
       <h3 class="card-title">
         Nombre: <span>{{ lostDog.name }}</span>
       </h3>
-      <!-- Información de contacto que se muestra u oculta según el estado -->
+      <!-- Información de contacto del propietario -->
       <div>
         <p class="card-text"><span>Email:</span> {{ lostDog.email }}</p>
         <p class="card-text"><span>Teléfono:</span> {{ lostDog.phone }}</p>
       </div>
-      <!-- Ubicación del objeto -->
+      <!-- Ubicación y detalles del perro perdido -->
       <div class="card-section">
         <span>Ubicación y detalles:</span>
         <div class="card-text-content">{{ lostDog.location }}</div>
       </div>
-      <!-- Fecha en la que se encontró el objeto -->
+      <!-- Fecha en la que se encontró el perro perdido -->
       <p class="card-text"><span>Fecha:</span> {{ lostDog.date }}</p>
-      <!-- Observaciones adicionales -->
     </div>
     <!-- Encabezado de la tarjeta con botones de editar y eliminar si el usuario es el propietario -->
     <div v-if="isOwner" class="card-header">
-      <!-- Botón para editar el objeto -->
+      <!-- Botón para editar el perro perdido -->
       <div class="button-container">
         <router-link
           :to="{ name: 'edit-lostDog-found', params: { id: lostDog.id } }"
@@ -72,7 +80,7 @@ const isOwner = computed(() => {
           </svg>
         </router-link>
       </div>
-      <!-- Botón para eliminar el objeto -->
+      <!-- Botón para eliminar el perro perdido -->
       <div class="button-container">
         <button type="button" @click="lostDogsStore.deleteLostDog(lostDog.id)">
           <svg
@@ -183,7 +191,7 @@ const isOwner = computed(() => {
   margin-top: 1rem; /* Margen superior para separación */
 }
 
-/* Estilos del botón de reclamar/cerrar contacto */
+/* Botón de reclamar/cerrar contacto */
 .claim-button {
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;

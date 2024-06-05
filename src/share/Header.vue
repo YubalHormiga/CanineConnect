@@ -11,6 +11,7 @@
 
 <style scoped>
 /* Estilos para el encabezado */
+
 .header {
   color: white;
   display: flex;
@@ -18,13 +19,13 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  min-height: 25vh;
+  min-height: 15vh;
   height: auto;
   padding: 2rem;
 }
 .name {
   font-size: clamp(4.5rem, 4vw + 1.5rem, 13.25rem);
-  margin: 0;
+  margin: 3rem 0 0 0;
 }
 .site-name {
   display: flex;

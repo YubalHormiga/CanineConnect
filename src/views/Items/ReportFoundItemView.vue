@@ -15,8 +15,12 @@ import { useAuthStore } from "@/stores/authStore";
 /* Importaciones de composables */
 import useImage from "@/composables/useImage";
 
+/* Importaciones de helpers */
+import { limitCharacters } from "@/helpers";
+
 // Usamos el composable para el manejo de imágenes y extraemos las propiedades necesarias
-const { url, onFileChange, isImageUploaded, spinner } = useImage("lostItems_images");
+const { url, onFileChange, isImageUploaded, spinner } =
+  useImage("lostItems_images");
 
 // Usamos el store de items y de auth
 const items = useItemsStore();
@@ -54,10 +58,9 @@ const handleSubmit = async (data) => {
   }
 };
 
-const limitCharacters = (field, maxLength) => {
-  if (formData[field].length >= maxLength) {
-    formData[field] = formData[field].substring(0, maxLength);
-  }
+// Función para manejar la limitación de caracteres
+const handleLimitCharacters = (field, maxLength) => {
+  limitCharacters(formData, field, maxLength);
 };
 </script>
 
@@ -166,7 +169,7 @@ const limitCharacters = (field, maxLength) => {
           }"
           validation-visibility="blur"
           v-model.trim="formData.description"
-          @input="limitCharacters('description', 120)"
+          @input="handleLimitCharacters('description', 120)"
         />
         <FormKit
           type="textarea"
@@ -181,7 +184,7 @@ const limitCharacters = (field, maxLength) => {
           }"
           validation-visibility="blur"
           v-model.trim="formData.location"
-          @input="limitCharacters('location', 120)"
+          @input="handleLimitCharacters('location', 120)"
         />
 
         <FormKit
@@ -196,7 +199,7 @@ const limitCharacters = (field, maxLength) => {
           }"
           validation-visibility="blur"
           v-model.number="formData.observations"
-          @input="limitCharacters('observations', 120)"
+          @input="handleLimitCharacters('observations', 120)"
         />
       </FormKit>
     </div>

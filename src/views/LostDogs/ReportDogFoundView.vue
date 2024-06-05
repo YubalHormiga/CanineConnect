@@ -1,22 +1,34 @@
+<!-- ReportDogFoundView ok -->
 <script setup>
+/* Importaciones de bibliotecas externas */
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 
+/* Importaciones de componentes locales */
 import Link from "@/components/Link.vue";
+import Spinner from "@/components/Spinner.vue";
 
+/* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
 import { useAuthStore } from "@/stores/authStore.js";
 
+/* Importaciones de composables */
 import useImage from "@/composables/useImage";
-import Spinner from "@/components/Spinner.vue";
 
+// Importación de helpers
+import { limitCharacters } from '@/helpers';
+
+// Uso del composable useImage para manejar la carga de imágenes
 const { url, onFileChange, isImageUploaded, spinner } = useImage("lostDogs_images");
 
+// Uso de useRouter para la navegación programática
 const router = useRouter();
 
+// Inicialización de los stores
 const lostDogsStore = useLostDogsStore();
 const authStore = useAuthStore();
 
+// Datos reactivos para el formulario
 const formData = reactive({
   image: "",
   name: "",
@@ -26,6 +38,7 @@ const formData = reactive({
   date: "",
 });
 
+// Manejo del envío del formulario
 const handleSubmit = async (data) => {
   const { image, ...values } = data;
   try {
@@ -34,25 +47,27 @@ const handleSubmit = async (data) => {
       userId: authStore.userData.uid,
       image: url.value,
     });
-
+    // Redirección a la página de "lost-dogs"
     router.push({ name: "lost-dogs" });
   } catch (error) {
     console.log(error);
   }
 };
 
-const limitCharacters = (field, maxLength) => {
-  if (formData[field].length >= maxLength) {
-    formData[field] = formData[field].substring(0, maxLength);
-  }
+// Función para limitar los caracteres en los campos de texto
+const handleLimitCharacters = (field, maxLength) => {
+  limitCharacters(formData, field, maxLength);
 };
 </script>
 
 <template>
+  <!-- Contenedor principal -->
   <div class="container">
+    <!-- Nota de gratitud -->
     <h4 class="gratitude-note">
       ¡Gracias por tu ayuda en la reunificación de mascotas perdidas!
     </h4>
+    <!-- Instrucciones para el formulario -->
     <p>
       Si has encontrado una mascota y deseas reportarlo para que su dueño pueda
       recuperarla, por favor sigue estos pasos: Completa el siguiente formulario
@@ -71,8 +86,10 @@ const limitCharacters = (field, maxLength) => {
       ¡Tu ayuda es fundamental para reunificación de mascotas perdidas!
     </p>
   </div>
+  <!-- Formulario para reportar mascota encontrada -->
   <div class="form">
     <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
+      <!-- Campo para cargar imagen -->
       <FormKit
         type="file"
         label="Añade una imagen y espera a que se cargue"
@@ -85,13 +102,15 @@ const limitCharacters = (field, maxLength) => {
         @change="onFileChange"
         v-model.trim="formData.image"
       />
-      <!-- Spinner y previsualización de la imagen -->
+      <!-- Spinner mientras se carga la imagen -->
       <div v-if="spinner" class="spinner">
         <Spinner />
       </div>
+      <!-- Previsualización de la imagen cargada -->
       <div v-else-if="isImageUploaded" class="image-container">
         <img :src="url" alt="Nueva imagen producto" class="image" />
       </div>
+      <!-- Campo para la fecha del hallazgo -->
       <FormKit
         class="message-input"
         type="date"
@@ -105,6 +124,7 @@ const limitCharacters = (field, maxLength) => {
         }"
         v-model.trim="formData.date"
       />
+      <!-- Campo para el nombre -->
       <FormKit
         type="text"
         label="Nombre"
@@ -116,6 +136,7 @@ const limitCharacters = (field, maxLength) => {
         }"
         v-model.trim="formData.name"
       />
+      <!-- Campo para el teléfono -->
       <FormKit
         type="tel"
         label="Teléfono"
@@ -127,6 +148,7 @@ const limitCharacters = (field, maxLength) => {
         }"
         v-model.trim="formData.phone"
       />
+      <!-- Campo para el email -->
       <FormKit
         type="email"
         label="Email"
@@ -138,6 +160,7 @@ const limitCharacters = (field, maxLength) => {
         }"
         v-model.trim="formData.email"
       />
+      <!-- Campo para la ubicación y detalles -->
       <FormKit
         type="textarea"
         label="Ubicación y detalles"
@@ -147,27 +170,28 @@ const limitCharacters = (field, maxLength) => {
         validation="required | length:0,200"
         :validation-messages="{
           required: 'La ubicación es obligatoria',
-          length: 'La ubicación no puede tener más de 120 caracteres.',
+          length: 'La ubicación no puede tener más de 200 caracteres.',
         }"
         validation-visibility="blur"
         v-model="formData.location"
-        @imput="limitCharacters('location', 200)"
+        @input="handleLimitCharacters('location', 200)"
       />
-
     </FormKit>
   </div>
 </template>
+
 <style scoped>
+/* Estilos para el contenedor principal */
 .container {
   padding: 2rem;
 }
-.lostDog-container {
-  padding: 2rem;
-}
+
+/* Estilos para el contenedor de la nota de gratitud */
 .gratitude-note {
   text-align: center;
 }
-/* Estilo del formulario */
+
+/* Estilos para el formulario */
 .form {
   display: flex;
   justify-content: center; /* Centrar horizontalmente */
@@ -189,6 +213,7 @@ const limitCharacters = (field, maxLength) => {
   justify-content: space-around;
   margin-top: 6rem;
 }
+
 /* Contenedor para la imagen */
 .image-container {
   display: flex;

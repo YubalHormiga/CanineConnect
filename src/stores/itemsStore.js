@@ -1,4 +1,4 @@
-// itemsStore 
+// itemsStore
 import { computed } from "vue";
 import { defineStore } from "pinia";
 import { useFirestore, useCollection, useFirebaseStorage } from "vuefire";
@@ -9,15 +9,9 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
-  doc
-  
+  doc,
 } from "firebase/firestore";
 import { ref as storageRef, deleteObject } from "firebase/storage";
-import { inject } from "vue";
-import useToastQuestion from "@/composables/UseToastQuestion";
-
-useToastQuestion()
-const toast = inject("toast");
 /* Definición de la tienda (store) de items */
 export const useItemsStore = defineStore("itemsStore", () => {
   const db = useFirestore(); // Obtenemos una referencia a Firestore
@@ -80,15 +74,15 @@ export const useItemsStore = defineStore("itemsStore", () => {
       }
     }
   }
-  
+
   // Propiedad computada para verificar si no hay resultados
   const noResults = computed(() => itemsCollection.value.length === 0); // Computed property para verificar si no hay resultados
 
   return {
     createItem,
-    updateItem, 
-    deleteItem, 
-    itemsCollection, 
+    updateItem,
+    deleteItem,
+    itemsCollection,
     noResults,
   };
 });
