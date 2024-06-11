@@ -75,6 +75,23 @@ export const useItemsStore = defineStore("itemsStore", () => {
     }
   }
 
+  // Función para eliminar un item
+  async function deleteItem(id) {
+    if (confirm("Eliminar Producto")) {
+      try {
+        const docRef = doc(db, "items", id); // Creamos una referencia al documento que queremos eliminar
+        const docSnap = await getDoc(docRef); // Obtenemos los datos actuales del documento
+        const { image } = docSnap.data(); // Extraemos la URL de la imagen del documento
+        const imageRef = storageRef(storage, image); // Creamos una referencia a la imagen en Firebase Storage
+
+        await deleteDoc(docRef); // Eliminamos el documento de Firestore
+        await deleteObject(imageRef); // Eliminamos la imagen de Firebase Storage
+      } catch (error) {
+        console.error("Error al eliminar el item:", error); // Manejo de errores
+      }
+    }
+  }
+
   // Propiedad computada para verificar si no hay resultados
   const noResults = computed(() => itemsCollection.value.length === 0); // Computed property para verificar si no hay resultados
 

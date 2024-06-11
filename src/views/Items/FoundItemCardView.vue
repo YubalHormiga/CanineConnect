@@ -3,10 +3,15 @@
 /* Importaciones de bibliotecas externas */
 import { RouterLink } from "vue-router";
 import { ref, computed } from "vue";
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
 /* Importaciones de stores */
 import { useItemsStore } from "@/stores/itemsStore";
 import { useAuthStore } from "@/stores/authStore";
+
+/* Importaciones de composable */
+import useLocationMap from "@/composables/useLocationMap";
 
 /* Definición de propiedades (props) */
 const props = defineProps({
@@ -20,6 +25,8 @@ const props = defineProps({
 const items = useItemsStore();
 const authStore = useAuthStore();
 
+const { zoom, pin } = useLocationMap();
+
 /* Propiedad computada para verificar si el usuario actual es el propietario del objeto */
 const isOwner = computed(() => props.item.userId === authStore.userData?.uid);
 
@@ -32,7 +39,9 @@ const toggleContactInfo = () => {
 };
 
 /* Propiedad computada para cambiar dinámicamente el texto del botón */
-const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : 'Reclamar'));
+const buttonText = computed(() =>
+  showContactInfo.value ? "Cerrar Contacto" : "Reclamar"
+);
 </script>
 
 <template>
@@ -57,10 +66,10 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
         <div class="card-text-content">{{ item.description }}</div>
       </div>
       <!-- Ubicación del objeto -->
-      <div class="card-section">
+      <!-- <div class="card-section">
         <span>Ubicación:</span>
         <div class="card-text-content">{{ item.location }}</div>
-      </div>
+      </div> -->
       <!-- Fecha en la que se encontró el objeto -->
       <p class="card-text"><span>Fecha:</span> {{ item.date }}</p>
       <!-- Observaciones adicionales -->
@@ -68,6 +77,25 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
         <span>Observaciones:</span>
         <div class="card-text-content">{{ item.observations }}</div>
       </div>
+      <!-- Contenedor de la mapa del objeto -->
+      <div class="map-container">
+        <LMap
+          ref="map"
+          v-model:zoom="zoom"
+          :center="[item.map[0], item.map[1]]"
+          :use-global-leaflet="false"
+        >
+          <LMarker
+            :lat-lng="[item.map[0], item.map[1]]"
+            draggable
+            @moveend="pin"
+          />
+          <LTileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          ></LTileLayer>
+        </LMap>
+      </div>
+
       <!-- Botón para reclamar o cerrar contacto -->
       <div class="button-container">
         <button @click="toggleContactInfo" class="claim-button">
@@ -75,6 +103,7 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
         </button>
       </div>
     </div>
+
     <!-- Encabezado de la tarjeta con botones de editar y eliminar si el usuario es el propietario -->
     <div class="card-header" v-if="isOwner">
       <!-- Botón para editar el objeto -->
@@ -127,6 +156,11 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
 </template>
 
 <style scoped>
+/* Contenedor Mapa */
+.map-container {
+  height: 30rem;
+  margin-bottom: 1rem;
+}
 /* Estilos generales de la tarjeta */
 .card {
   display: flex;
@@ -138,8 +172,7 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   margin: 0 auto;
-  padding: 1rem
-
+  padding: 1rem;
 }
 
 .card:hover {
@@ -192,8 +225,7 @@ const buttonText = computed(() => (showContactInfo.value ? 'Cerrar Contacto' : '
   white-space: pre-wrap;
   word-wrap: break-word;
   max-height: 100px; /* Altura máxima del contenedor */
-   color: #666;
-
+  color: #666;
 }
 
 /* Encabezado de la tarjeta */

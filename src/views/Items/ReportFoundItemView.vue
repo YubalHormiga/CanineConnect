@@ -3,6 +3,8 @@
 /* Importaciones de bibliotecas externas */
 import { reactive, watch } from "vue";
 import { useRouter } from "vue-router";
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
 /* Importaciones de componentes locales */
 import Link from "@/components/Link.vue";
@@ -14,13 +16,14 @@ import { useAuthStore } from "@/stores/authStore";
 
 /* Importaciones de composables */
 import useImage from "@/composables/useImage";
-
+import useLocationMap from "@/composables/useLocationMap";
 /* Importaciones de helpers */
 import { limitCharacters } from "@/helpers";
 
 // Usamos el composable para el manejo de imágenes y extraemos las propiedades necesarias
 const { url, onFileChange, isImageUploaded, spinner } =
   useImage("lostItems_images");
+const { center, zoom, pin, getUserLocation } = useLocationMap();
 
 // Usamos el store de items y de auth
 const items = useItemsStore();
@@ -30,19 +33,19 @@ const router = useRouter();
 
 // Definimos los datos del formulario de manera reactiva
 const formData = reactive({
+  map: "",
+  image: "",
+  date: "",
   name: "",
   email: "",
   phone: "",
   description: "",
-  location: "",
-  date: "",
-  image: "",
   observations: "",
 });
 
 // Función para manejar el envío del formulario
 const handleSubmit = async (data) => {
-  const { image, ...values } = data;
+  const { image, map, ...values } = data;
 
   try {
     // Creamos un nuevo item usando el store
@@ -50,6 +53,7 @@ const handleSubmit = async (data) => {
       ...values,
       userId: authStore.userData.uid, // Incorporamos userId con el UID del usuario autenticado
       image: url.value, // Usamos la URL de la imagen subida
+      map: center.value,
     });
     // Redirigimos a la página de "lost-items" después de la creación
     router.push({ name: "lost-items" });
@@ -92,6 +96,27 @@ const handleLimitCharacters = (field, maxLength) => {
     <div class="form">
       <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
         <!-- Campos del formulario -->
+        <!-- Campos de Geolocalización -->
+        <div class="geolocation-container">
+          <button class="geolocation-button" @click="getUserLocation">
+            Obtener Ubicación
+          </button>
+          <p class="pin">o desplázate con el pin</p>
+        </div>
+        <div class="map-container">
+          <LMap
+            ref="map"
+            v-model:zoom="zoom"
+            :center="center"
+            :use-global-leaflet="false"
+          >
+            <LMarker :lat-lng="center" draggable @moveend="pin" />
+            <LTileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            ></LTileLayer>
+          </LMap>
+        </div>
+
         <FormKit
           type="file"
           label="Añade una imagen del objeto y espera a que se cargue"
@@ -115,7 +140,7 @@ const handleLimitCharacters = (field, maxLength) => {
           type="date"
           name="date"
           label="Fecha en la que se encontró"
-          validation="blur"
+          validation="blur | required"
           validation-visibility="live"
           format="DD MM YY"
           v-model.trim="formData.date"
@@ -173,22 +198,6 @@ const handleLimitCharacters = (field, maxLength) => {
         />
         <FormKit
           type="textarea"
-          label="Ubicación donde se encontró el objeto"
-          name="location"
-          placeholder="En donde se ha encontrado"
-          :help="`${formData.location.length} / 120`"
-          validation="required | length:0,120"
-          :validation-messages="{
-            required: 'La ubicación es obligatoria',
-            length: 'La descripción no puede tener más de 120 caracteres',
-          }"
-          validation-visibility="blur"
-          v-model.trim="formData.location"
-          @input="handleLimitCharacters('location', 120)"
-        />
-
-        <FormKit
-          type="textarea"
           label="Observaciones adicionales"
           name="observations"
           placeholder="Observaciones adicionales"
@@ -234,11 +243,40 @@ const handleLimitCharacters = (field, maxLength) => {
   margin-bottom: 1rem; /* Espaciado entre elementos del formulario */
 }
 
+/* Estilos para geolocalización */
+.geolocation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.geolocation-button {
+  display: block;
+  border: none;
+  cursor: pointer;
+  color: #3367d6;
+}
+.geolocation-button:hover {
+  display: block;
+  cursor: pointer;
+  font-weight: 700;
+}
+.pin {
+  display: block;
+}
+
+/* Contenedor Mapa */
+.map-container {
+  height: 30rem;
+  margin-bottom: 2rem;
+}
 /* Contenedor para la imagen */
 .image-container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-bottom: 1rem;
 }
 
 /* Estilo de la imagen */
