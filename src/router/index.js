@@ -1,8 +1,11 @@
+import { inject } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import { useFirebaseAuth } from "vuefire";
 import { onAuthStateChanged } from "firebase/auth";
-import { inject } from "vue";
 import HomeView from "../views/Home/HomeView.vue";
+import { useAuthStore } from "@/stores/authStore";
+
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +15,13 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+    },
+    {
+      path: "/admin",
+      name: "admin",
+
+      component: () => import("../views/Admin/AdminView.vue"),
+      meta: { requiresAdmin: true }, // Añadido
     },
     {
       path: "/informacion",
@@ -116,22 +126,34 @@ const router = createRouter({
       path: "/:catchAll(.*)*",
       component: () => import("../views/ErrorNotFound.vue"),
     },
+
   ],
 });
 
 router.beforeEach(async (to, from, next) => {
   const toast = inject("toast");
-  const requiresAuth = to.matched.some((url) => url.meta.requiresAuth);
-  if (requiresAuth) {
+  const authStore = useAuthStore();
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
+
+  if (requiresAuth || requiresAdmin) {
     try {
       await athenticateUser();
-      next();
+      if (requiresAdmin && !authStore.isAdmin) {
+        toast.open({
+          message: "Acceso denegado: solo para administradores.",
+          type: "error",
+        });
+        next({ name: "home" }); // Redirigir a home si no es administrador
+      } else {
+        next();
+      }
     } catch (error) {
       toast.open({
-        message: `Solo para usuarios registrados`,
+        message: "Solo para usuarios registrados.",
         type: "error",
       });
-      next(false);
+      next({ name: "login" }); // Redirigir a login si no está autenticado
     }
   } else {
     next();

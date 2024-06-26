@@ -6,6 +6,9 @@ import FoundDogCardView from "./FoundDogCardView.vue";
 
 /* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore()
 
 // Inicializar el store de perros perdidos
 const lostDogsStore = useLostDogsStore();
@@ -23,7 +26,7 @@ const lostDogsStore = useLostDogsStore();
       precisos y una imagen clara de la mascota.
     </p>
     <!-- Enlace para reportar una mascota encontrada -->
-    <div class="report-link-container">
+    <div v-if="authStore.isAdmin" class="report-link-container" >
       <Link to="found-dogs" class="report-link">
         Reportar Mascota
       </Link>

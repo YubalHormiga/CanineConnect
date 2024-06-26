@@ -55,7 +55,6 @@ const isDataReady = ref(false);
 
 // Observamos cambios en el item y actualizamos formData cuando cambie
 watch(item, async (item) => {
-  console.log(item);
   if (!item) {
     // Si el item no existe, redirigimos a la página de "lost-items"
     router.push({ name: "lost-items" });
@@ -292,6 +291,7 @@ const handleLimitCharacters = (field, maxLength) => {
   gap: 1rem;
 }
 .geolocation-button {
+  background-color: #fff;
   display: block;
   border: none;
   cursor: pointer;

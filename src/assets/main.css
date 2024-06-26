@@ -1,11 +1,18 @@
 /* main.css */
 
-/*Globales*/
+/* Variables */
+:root {
+  --primary-font: 'Roboto', sans-serif;
+  --primary-color: #000;
+  --background-color: #fff;
+  --max-width: 120rem;
+}
 
+/* Globales */
 html {
   box-sizing: border-box;
-  font-size: 62.35%;
-  /*1rem = 10px*/
+  font-size: 62.5%;
+  /* 1rem = 10px */
 }
 
 *,
@@ -13,66 +20,74 @@ html {
 *:after {
   box-sizing: inherit;
 }
+
 * {
   margin: 0;
   padding: 0;
 }
+
 body {
   min-height: 100vh;
-  font-family: 'Roboto', sans-serif;
-  background-color:#fff;
-  font-size: 16px; 
+  font-family: var(--primary-font);
+  background-color: var(--background-color);
+  font-size: 1.6rem; /* 16px */
+  font-optical-sizing: auto;
   line-height: 1.6;
-
+  color: var(--primary-color);
 }
+
 input, button, textarea, select {
   font: inherit;
 }
-p {
-  text-wrap: pretty;
-}
+
 h1, h2, h3, h4, h5, h6 {
-  text-wrap: balance;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-}
-h1 {
-  font-size: 24px;
+  font-family: var(--primary-font);
+  margin: 0 0 2rem 0;
+  font-weight: 700;
 }
 
-h2 {
-  font-size: 20px;
-}
+h1 { font-size: 2.4rem; } /* 24px */
+h2 { font-size: 2rem; } /* 20px */
+h3 { font-size: 1.8rem; } /* 18px */
+h4 { font-size: 1.6rem; } /* 16px */
+h5 { font-size: 1.4rem; } /* 14px */
+h6 { font-size: 1.2rem; } /* 12px */
 
-h3 {
-  font-size: 18px;
-}
-
-h4 {
-  font-size: 16px;
-}
-
-h5 {
-  font-size: 14px;
-}
-
-h6 {
-  font-size: 12px;
-}
 p {
-  font-size: 16px;
+  font-size: 1.6rem; /* 16px */
   line-height: 1.5;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
 }
 
 img, video, svg {
   height: auto;
   max-width: 100%;
+  /* width: 100%; */
+  display: block;
+}
+
+.container {
+  width: 95%;
+  margin: 0 auto;
+  max-width: var(--max-width);
 }
 
 
-@media (min-width: 640px) {
-  .container {
-    max-width: 120rem;
-    margin: 0 auto;
-  }
-}
+

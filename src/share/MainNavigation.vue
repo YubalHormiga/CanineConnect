@@ -3,8 +3,8 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { RouterLink } from "vue-router";
 import { useRoute } from "vue-router";
-import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/stores/authStore";
 
 // Definición de los elementos de navegación
 const navItems = [
@@ -17,15 +17,16 @@ const navItems = [
   { text: "Blog", to: { name: "blog" } },
   { text: "Donar", to: { name: "donate" } },
   { text: "Chat", to: { name: "chat" } },
+  // { text: "Administación", to: { name: "admin" } },
 ];
 
 // Uso del store de autenticación
 const authStore = useAuthStore();
+
 const route = useRoute();
-const { isLoggedIn, userData } = storeToRefs(authStore);
+const { isLoggedIn, userData, isAdmin } = storeToRefs(authStore);
 const { logoutUser } = authStore;
 const isMenuOpen = ref(false);
-
 // Función para alternar el menú
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -70,6 +71,15 @@ onBeforeUnmount(() => {
             class="nav-link"
             :to="item.to"
             >{{ item.text }}</router-link
+          >
+        </div>
+        <!-- Enlace de administración visible solo para administradores -->
+        <div v-if="isAdmin" class="nav-item">
+          <router-link
+            active-class="active-link"
+            class="nav-link"
+            :to="{ name: 'admin' }"
+            >Administación</router-link
           >
         </div>
       </div>
