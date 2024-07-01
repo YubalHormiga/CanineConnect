@@ -1,13 +1,12 @@
 <!-- FoundDogCardView ok -->
 <script setup>
 /* Importaciones de bibliotecas externas */
-import { computed } from "vue";
-import { RouterLink} from "vue-router";
+import { computed, ref } from "vue";
+import { RouterLink } from "vue-router";
 
 /* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
 import { useAuthStore } from "@/stores/authStore";
-
 
 // Definir las propiedades esperadas para el componente
 const props = defineProps({
@@ -17,6 +16,8 @@ const props = defineProps({
   },
 });
 
+// Estado para mostrar o esconder contenido adicional
+const showContent = ref(false);
 // Inicializar los stores necesarios
 const lostDogsStore = useLostDogsStore();
 const authStore = useAuthStore();
@@ -28,187 +29,277 @@ const isOwner = computed(() => {
 </script>
 
 <template>
-  <div class="card">
-    <!-- Contenedor de la imagen del perro perdido -->
-    <div class="card-image-container">
-      <img
-        :src="lostDog.image"
-        :alt="'Imagen de ' + lostDog.name"
-        class="card-img"
-      />
+  <article class="card">
+    <img
+      class="card-background"
+      :src="lostDog.image"
+      alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+      width="1920"
+      height="2193"
+    />
+    <div class="card-content | flow">
+      <div class="card-content-container | flow">
+        <h2 class="card-title">{{ lostDog.dogName }}</h2>
+        <p class="card-description">
+          {{ lostDog.observations }}
+        </p>
+      </div>
+      <div v-if="showContent">
+        <!-- Encabezado de la tarjeta con botones de editar y eliminar si el usuario es el propietario -->
+        <div class="card-header">
+          <div>
+            <p>Fecha de la desaparición : {{ lostDog.date }}</p>
+            <p>Email: {{ lostDog.email }}</p>
+            <p>Teléfono: {{ lostDog.phone }}</p>
+          </div>
+          <!-- Botón para editar el perro perdido -->
+          <div class="buttons-container" v-if="isOwner">
+            <div class="button-container">
+              <router-link
+                :to="{ name: 'edit-lostDog-found', params: { id: lostDog.id } }"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-pencil"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#ffbf00"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"
+                  />
+                  <path d="M13.5 6.5l4 4" />
+                </svg>
+              </router-link>
+            </div>
+            <!-- Botón para eliminar el perro perdido -->
+            <div class="button-container">
+              <div
+                class="custom-icon"
+                @click="lostDogsStore.deleteLostDog(lostDog.id)"
+                role="button"
+                tabindex="0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-trash"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#ffbf00"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M4 7l16 0" />
+                  <path d="M10 11l0 6" />
+                  <path d="M14 11l0 6" />
+                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Botones para mostrar/ocultar contenido -->
+      <button
+        @click="showContent = !showContent"
+        v-if="!showContent"
+        class="card-button"
+        aria-expanded="false"
+        aria-controls="additional-content"
+      >
+        Más Información
+      </button>
+      <button
+        @click="showContent = !showContent"
+        v-else
+        class="card-button"
+        aria-expanded="true"
+        aria-controls="additional-content"
+      >
+        Cerrar
+      </button>
     </div>
-    <!-- Contenido de la tarjeta -->
-    <div class="card-content">
-      <h3 class="card-title">
-        Nombre: <span>{{ lostDog.name }}</span>
-      </h3>
-      <!-- Información de contacto del propietario -->
-      <div>
-        <p class="card-text"><span>Email:</span> {{ lostDog.email }}</p>
-        <p class="card-text"><span>Teléfono:</span> {{ lostDog.phone }}</p>
-      </div>
-      <!-- Ubicación y detalles del perro perdido -->
-      <div class="card-section">
-        <span>Ubicación y detalles:</span>
-        <div class="card-text-content">{{ lostDog.location }}</div>
-      </div>
-      <!-- Fecha en la que se encontró el perro perdido -->
-      <p class="card-text"><span>Fecha:</span> {{ lostDog.date }}</p>
-    </div>
-    <!-- Encabezado de la tarjeta con botones de editar y eliminar si el usuario es el propietario -->
-    <div v-if="isOwner" class="card-header">
-      <!-- Botón para editar el perro perdido -->
-      <div class="button-container">
-        <router-link
-          :to="{ name: 'edit-lostDog-found', params: { id: lostDog.id } }"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-pencil"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#000000"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
-            <path d="M13.5 6.5l4 4" />
-          </svg>
-        </router-link>
-      </div>
-      <!-- Botón para eliminar el perro perdido -->
-      <div class="button-container">
-        <button type="button" @click="lostDogsStore.deleteLostDog(lostDog.id)">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-trash"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="#ff2825"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <path d="M4 7l16 0" />
-            <path d="M10 11l0 6" />
-            <path d="M14 11l0 6" />
-            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </div>
+  </article>
 </template>
 
 <style scoped>
-/* Estilos generales de la tarjeta */
+/* Estilos específicos para el icono de eliminar */
+.custom-icon {
+  cursor: pointer;
+  display: inline-block; /* Para evitar espacios adicionales */
+  background-color: transparent; /* Fondo transparente */
+}
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+}
+h2 {
+  font-size: 2.25rem;
+  color: white;
+}
+
+p {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 1rem;
+  margin: 0;
+}
+.card-description {
+  margin: 1rem auto;
+}
+
+/* CARD COMPONENT */
+
 .card {
+  display: grid;
+  place-items: center;
+  width: 80vw;
+  max-width: 25rem;
+  height: 38rem;
+  overflow: hidden;
+  border-radius: 0.625rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+.card > * {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.card-background {
+  object-fit: cover;
+  max-width: 100%;
+  height: 100%;
+}
+
+.card-content {
+  --flow-space: 1rem;
   display: flex;
   flex-direction: column;
-  width: 35rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-  margin: 0 auto;
-  padding: 1rem;
+  justify-content: space-between;
+  align-self: flex-end;
+  height: 100%;
+  padding: 30% 1.25rem 1.875rem;
+  background: linear-gradient(
+    180deg,
+    hsla(0, 0%, 0%, 0) 0%,
+    hsla(0, 0%, 0%, 0.3) 10%,
+    hsl(0, 0%, 0%) 100%
+  );
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Contenedor de la imagen */
-.card-image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.card-img {
-  max-width: 100%;
-  max-height: 13rem;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Contenido de la tarjeta */
-.card-content {
-  padding: 1rem;
-  flex-grow: 1;
+.card-content-container {
+  --flow-space: 1.25rem;
 }
 
 .card-title {
-  margin: 0 0 8px;
-  color: #333;
+  position: relative;
+  width: fit-content;
+  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
 }
 
-.card-text,
-.card-title span {
-  margin: 0 0 8px;
-  color: #666;
+.card-title::after {
+  content: "";
+  position: absolute;
+  height: 0.3125rem;
+  width: calc(100% + 1.25rem);
+  bottom: calc((1.25rem - 0.5rem) * -1);
+  left: -1.25rem;
+  background-color: rgb(255, 195, 0);
 }
 
-.card-text span,
-.card-section span {
-  color: #333;
+.card-button {
+  padding: 0.75em 1.6em;
+  width: fit-content;
+  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+  font-variant: small-caps;
   font-weight: bold;
-}
-
-/* Contenido de texto dentro de la tarjeta */
-.card-text-content {
-  width: 100%;
-  padding: 8px;
+  border-radius: 0.45em;
   border: none;
-  overflow-y: auto;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  max-height: 100px; /* Altura máxima del contenedor */
+  background-color: rgb(255, 195, 0);
+  font-size: 1.125rem;
+  color: black;
 }
 
-/* Encabezado de la tarjeta */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 16px;
+.card-button:focus {
+  outline: 2px solid black;
+  outline-offset: -5px;
 }
 
-/* Contenedor del botón */
-.button-container {
-  display: flex;
-  justify-content: center; /* Centrar el botón horizontalmente */
-  align-items: center;
-  margin-top: 1rem; /* Margen superior para separación */
-}
+@media (any-hover: hover) and (any-pointer: fine) {
+  .card-content {
+    transform: translateY(62%);
+    transition: transform 500ms ease-out;
+    transition-delay: 500ms;
+  }
 
-/* Botón de reclamar/cerrar contacto */
-.claim-button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  .card-title::after {
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 1000ms ease-in, transform 500ms ease-out;
+    transition-delay: 500ms;
+    transform-origin: right;
+  }
 
-.claim-button:hover {
-  background-color: #e0e0e0;
-}
+  .card-background {
+    transition: transform 500ms ease-in;
+  }
 
-/* Botón sin estilos específicos */
-button {
-  border: none;
-  background: none;
-  cursor: pointer;
+  .card-content-container > :not(.card-title),
+  .card-button {
+    opacity: 0;
+    transition: transform 500ms ease-out, opacity 500ms ease-out;
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: scale(1.05);
+    transition: transform 500ms ease-in;
+  }
+
+  .card:hover .card-content,
+  .card:focus-within .card-content {
+    transform: translateY(0);
+    transition: transform 500ms ease-in;
+  }
+
+  .card:focus-within .card-content {
+    transition-duration: 0ms;
+  }
+
+  .card:hover .card-background,
+  .card:focus-within .card-background {
+    transform: scale(1.3);
+  }
+
+  .card:hover .card-content-container > :not(.card-title),
+  .card:hover .card-button,
+  .card:focus-within .card-content-container > :not(.card-title),
+  .card:focus-within .card-button {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+    transition-delay: 1000ms;
+  }
+
+  .card:hover .card-title::after,
+  .card:focus-within .card-title::after {
+    opacity: 1;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: opacity 500ms ease-in, transform 500ms ease-in;
+    transition-delay: 500ms;
+  }
 }
 </style>

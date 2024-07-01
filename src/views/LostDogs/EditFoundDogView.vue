@@ -17,10 +17,11 @@ import { useLostDogsStore } from "@/stores/lostDogsStore";
 import useImage from "@/composables/useImage";
 
 /* Importaciones de helpers */
-import { limitCharacters } from '@/helpers';
+import { limitCharacters } from "@/helpers";
 
 // Usamos el composable para el manejo de imágenes y extraemos las propiedades necesarias
-const { url, onFileChange, isImageUploaded, spinner } = useImage("lostDogs_images");
+const { url, onFileChange, isImageUploaded, spinner } =
+  useImage("lostDogs_images");
 
 // Usamos el store de perros perdidos
 const lostDogsStore = useLostDogsStore();
@@ -40,7 +41,7 @@ const formData = reactive({
   name: "",
   phone: "",
   email: "",
-  location: "",
+  observations: "",
   date: "",
 });
 
@@ -88,8 +89,8 @@ const handleLimitCharacters = (field, maxLength) => {
     <!-- Formulario -->
     <div class="form">
       <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
-               <!-- Sección de imagen y spinner -->
-               <div v-if="spinner" class="spinner">
+        <!-- Sección de imagen y spinner -->
+        <div v-if="spinner" class="spinner">
           <Spinner />
         </div>
         <div v-else-if="isImageUploaded" class="image-container">
@@ -137,6 +138,18 @@ const handleLimitCharacters = (field, maxLength) => {
           }"
           v-model.trim="formData.name"
         />
+        <!-- Campo para el nombre del perro -->
+        <FormKit
+          type="text"
+          label="Nombre del perro"
+          name="dogName"
+          placeholder="Nombre del perro"
+          validation="required"
+          :validation-messages="{
+            required: 'El nombre es Obligatorio',
+          }"
+          v-model.trim="formData.dogName"
+        />
         <FormKit
           type="tel"
           label="Teléfono"
@@ -162,17 +175,17 @@ const handleLimitCharacters = (field, maxLength) => {
         <FormKit
           type="textarea"
           label="Ubicación y detalles"
-          name="location"
+          name="observations"
           placeholder="Dónde se encontró y cualquier detalle relevante"
-          :help="`${formData.location.length} / 200`"
+          :help="`${formData.observations.length} / 200`"
           validation="required | length:0,200"
           :validation-messages="{
             required: 'La ubicación es obligatoria',
             length: 'La ubicación no puede tener más de 200 caracteres.',
           }"
           validation-visibility="blur"
-          v-model="formData.location"
-          @input="handleLimitCharacters('location', 200)"
+          v-model="formData.observations"
+          @input="handleLimitCharacters('observations', 200)"
         />
       </FormKit>
     </div>
@@ -188,14 +201,14 @@ const handleLimitCharacters = (field, maxLength) => {
 /* Estilo del formulario */
 .form {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   margin-top: 2rem;
-  align-items: center; 
-  min-height: 50vh; 
+  align-items: center;
+  min-height: 50vh;
 }
 
 .form > * {
-  max-width: 40rem; 
+  max-width: 40rem;
   width: 100%; /* Hace que el formulario ocupe todo el ancho disponible */
   margin: 0 auto;
   margin-bottom: 1rem; /* Espaciado entre elementos del formulario */
@@ -222,4 +235,3 @@ const handleLimitCharacters = (field, maxLength) => {
   max-height: 20rem; /* Limita la altura máxima de la imagen */
 }
 </style>
-

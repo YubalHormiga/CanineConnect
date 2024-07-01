@@ -33,7 +33,7 @@ const handleSubmit = async () => {
     return;
   }
   // Si no hay errores, procede con el registro
-  const displayName = `${firstName.value} ${lastName.value}`;
+  const displayName = `${firstName.value} `;
   await register(
     email.value,
     password.value,

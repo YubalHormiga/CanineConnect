@@ -32,9 +32,10 @@ const authStore = useAuthStore();
 const formData = reactive({
   image: "",
   name: "",
+  dogName:'',
   phone: "",
   email: "",
-  location: "",
+  observations: "",
   date: "",
 });
 
@@ -114,10 +115,9 @@ const handleLimitCharacters = (field, maxLength) => {
       <FormKit
         class="message-input"
         type="date"
-        label="Fecha del hallazgo"
+        label="¿Desde cuando lleva desaparecido?"
         name="date"
         format="DD MM YY"
-        placeholder="Fecha en que se encontró la mascota"
         validation="required"
         :validation-messages="{
           required: 'La fecha es obligatoria',
@@ -135,6 +135,18 @@ const handleLimitCharacters = (field, maxLength) => {
           required: 'El nombre es Obligatorio',
         }"
         v-model.trim="formData.name"
+      />
+      <!-- Campo para el nombre del perro -->
+      <FormKit
+        type="text"
+        label="Nombre del perro"
+        name="dogName"
+        placeholder="Nombre del perro"
+        validation="required"
+        :validation-messages="{
+          required: 'El nombre es Obligatorio',
+        }"
+        v-model.trim="formData.dogName"
       />
       <!-- Campo para el teléfono -->
       <FormKit
@@ -163,18 +175,18 @@ const handleLimitCharacters = (field, maxLength) => {
       <!-- Campo para la ubicación y detalles -->
       <FormKit
         type="textarea"
-        label="Ubicación y detalles"
-        name="location"
-        placeholder="Dónde se encontró y cualquier detalle relevante"
-        :help="`${formData.location.length} / 200`"
+        label="Observaciones"
+        name="observations"
+        placeholder="Cualquier detalle relevante que nos ayude a identificar a su perro, como raza, peso, etc"
+        :help="`${formData.observations.length} / 200`"
         validation="required | length:0,200"
         :validation-messages="{
           required: 'La ubicación es obligatoria',
           length: 'La ubicación no puede tener más de 200 caracteres.',
         }"
         validation-visibility="blur"
-        v-model="formData.location"
-        @input="handleLimitCharacters('location', 200)"
+        v-model="formData.observations"
+        @input="handleLimitCharacters('observations', 200)"
       />
     </FormKit>
   </div>

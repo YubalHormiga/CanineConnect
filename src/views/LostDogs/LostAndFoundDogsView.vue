@@ -17,7 +17,7 @@ const lostDogsStore = useLostDogsStore();
 <template>
   <div class="lostDog-container">
     <!-- Título de bienvenida -->
-    <h3>Bienvenido a la Sección de Mascota Perdida</h3>
+    <h2>Bienvenido a la Sección de Mascota Perdida</h2>
     <!-- Instrucciones para reportar una mascota encontrada -->
     <p>
       Por favor, utiliza este formulario para proporcionar información sobre la
@@ -71,6 +71,7 @@ h3 {
   list-style: none;
   padding: 0;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
 }

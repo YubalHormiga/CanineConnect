@@ -2,9 +2,22 @@
 
 /* Variables */
 :root {
+  --primary-100:#7F9E87;
+  --primary-200:#64826c;
+  --primary-300:#284431;
+  --accent-100:#F2C057;
+  --accent-200:#886300;
+  --text-100:#2E2E2E;
+  --text-200:#575757;
+  --bg-100:#F5E6CA;
+  --bg-200:#ebdcc0;
+  --bg-300:#c2b499;
+  
+
+  /* OTROS */
   --primary-font: 'Roboto', sans-serif;
   --primary-color: #000;
-  --background-color: #fff;
+  /* --background-color: #fff; */
   --max-width: 120rem;
 }
 
