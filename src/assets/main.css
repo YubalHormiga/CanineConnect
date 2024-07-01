@@ -2,22 +2,18 @@
 
 /* Variables */
 :root {
-  --primary-100:#7F9E87;
-  --primary-200:#64826c;
-  --primary-300:#284431;
-  --accent-100:#F2C057;
-  --accent-200:#886300;
-  --text-100:#2E2E2E;
-  --text-200:#575757;
-  --bg-100:#F5E6CA;
-  --bg-200:#ebdcc0;
-  --bg-300:#c2b499;
-  
+  /*Colores*/
+  --text-100: #575757;
+  --text-200: #2E2E2E;
+  --bg-100: #7F9E87;
+  --bg-200: #64826c;
+  --bg-300: #284431;
+  --accent-100: #F2C057;
+  --accent-200: #886300;
+
 
   /* OTROS */
   --primary-font: 'Roboto', sans-serif;
-  --primary-color: #000;
-  /* --background-color: #fff; */
   --max-width: 120rem;
 }
 
@@ -43,31 +39,65 @@ body {
   min-height: 100vh;
   font-family: var(--primary-font);
   background-color: var(--background-color);
-  font-size: 1.6rem; /* 16px */
+  font-size: 1.6rem;
+  /* 16px */
   font-optical-sizing: auto;
   line-height: 1.6;
-  color: var(--primary-color);
+  color: var(--text-200);
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--primary-font);
   margin: 0 0 2rem 0;
   font-weight: 700;
 }
 
-h1 { font-size: 2.4rem; } /* 24px */
-h2 { font-size: 2rem; } /* 20px */
-h3 { font-size: 1.8rem; } /* 18px */
-h4 { font-size: 1.6rem; } /* 16px */
-h5 { font-size: 1.4rem; } /* 14px */
-h6 { font-size: 1.2rem; } /* 12px */
+h1 {
+  font-size: 2.4rem;
+}
+
+/* 24px */
+h2 {
+  font-size: 2rem;
+}
+
+/* 20px */
+h3 {
+  font-size: 1.8rem;
+}
+
+/* 18px */
+h4 {
+  font-size: 1.6rem;
+}
+
+/* 16px */
+h5 {
+  font-size: 1.4rem;
+}
+
+/* 14px */
+h6 {
+  font-size: 1.2rem;
+}
+
+/* 12px */
 
 p {
-  font-size: 1.6rem; /* 16px */
+  font-size: 1.6rem;
+  /* 16px */
   line-height: 1.5;
 }
 
@@ -81,7 +111,8 @@ a:focus {
   text-decoration: underline;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -89,7 +120,9 @@ button {
   cursor: pointer;
 }
 
-img, video, svg {
+img,
+video,
+svg {
   height: auto;
   max-width: 100%;
   /* width: 100%; */
@@ -101,6 +134,3 @@ img, video, svg {
   margin: 0 auto;
   max-width: var(--max-width);
 }
-
-
-

@@ -217,7 +217,7 @@ p {
   width: calc(100% + 1.25rem);
   bottom: calc((1.25rem - 0.5rem) * -1);
   left: -1.25rem;
-  background-color: rgb(255, 195, 0);
+  background-color: var(--accent-100);
 }
 
 .card-button {
@@ -228,7 +228,7 @@ p {
   font-weight: bold;
   border-radius: 0.45em;
   border: none;
-  background-color: rgb(255, 195, 0);
+  background-color: var(--accent-100);
   font-size: 1.125rem;
   color: black;
 }

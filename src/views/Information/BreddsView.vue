@@ -63,8 +63,8 @@ onMounted(async () => {
 
 /* Estilos para el contenedor de cada tarjeta */
 .card-container {
-  width: 300px;
-  height: 400px;
+  max-width: 25rem;
+  height: 38rem;
   perspective: 1000px;
   margin: 3rem auto;
 }
@@ -138,11 +138,12 @@ onMounted(async () => {
   opacity: 0;
   transition: opacity 0.5s;
   z-index: 2;
+
 }
 
 /* Estilos para el hover de la tarjeta */
 .card:hover .dog-image {
-  height: 40%;
+  height: 50%;
 }
 
 .card:hover .info {
@@ -155,11 +156,14 @@ onMounted(async () => {
 
 /* Estilos para los encabezados en la información del perro */
 .info h2 {
-  margin: 10px 0;
+  margin: 0;
+  color: var( --text-100);
 }
 
 /* Estilos para los párrafos en la información del perro */
 .info p {
   margin: 5px 0;
+  font-size: 1.3rem;
+  color: var( --text-200);
 }
 </style>

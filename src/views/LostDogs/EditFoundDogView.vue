@@ -10,6 +10,7 @@ import { doc } from "firebase/firestore";
 import Link from "@/components/Link.vue";
 import Spinner from "@/components/Spinner.vue";
 
+
 /* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
 

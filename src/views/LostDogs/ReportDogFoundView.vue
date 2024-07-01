@@ -181,8 +181,8 @@ const handleLimitCharacters = (field, maxLength) => {
         :help="`${formData.observations.length} / 200`"
         validation="required | length:0,200"
         :validation-messages="{
-          required: 'La ubicación es obligatoria',
-          length: 'La ubicación no puede tener más de 200 caracteres.',
+          required: 'Debe añadir observaciones',
+          length: 'Las obsrevaciones no pueden superar los 200 caracteres.',
         }"
         validation-visibility="blur"
         v-model="formData.observations"

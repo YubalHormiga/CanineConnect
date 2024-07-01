@@ -112,15 +112,18 @@ const valueList = [
 .close-button {
   border: none;
   border-radius: 0.5rem;
-  background-color: rgba(201, 172, 172, 0.7);
+  background-color: var(--accent-100);
+  color:white;
   padding: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-bottom: 1rem;
 }
 
 .read-more-button:hover,
 .close-button:hover {
-  background-color: rgba(201, 172, 172, 1);
+  background-color:var(--accent-200);
+
 }
 
 /* Estilos para los párrafos */

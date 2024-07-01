@@ -95,8 +95,25 @@ onBeforeUnmount(() => {
             class="logoutUser"
             @click="logoutUser"
             :to="{ name: 'home' }"
-            >Cerrar Sesión</router-link
-          >
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-logout"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path
+                d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+              />
+              <path d="M9 12h12l-3 -3" />
+              <path d="M18 15l3 -3" /></svg
+          ></router-link>
         </div>
         <div
           v-else-if="route.name !== 'login' && route.name !== 'register'"
@@ -104,7 +121,27 @@ onBeforeUnmount(() => {
         >
           <router-link :to="{ name: 'login' }" class="login-link">
             <div class="identity">
-              <p class="identify-text">Inicia Sesión</p>
+              <p class="identify-text">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-user-circle"
+                  width="33"
+                  height="33"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#ffffff"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                  <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                  <path
+                    d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
+                  />
+                </svg>
+              </p>
             </div>
           </router-link>
         </div>
@@ -121,7 +158,7 @@ onBeforeUnmount(() => {
   align-items: center;
   padding: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(40, 68, 49, 0.4);
   transition: background-color 0.3s ease;
 }
 
@@ -207,7 +244,7 @@ onBeforeUnmount(() => {
 }
 
 .active-link {
-  color: rgba(184, 89, 89, 0.7);
+  color: var(--accent-100);
   font-weight: 700;
 }
 
@@ -293,7 +330,7 @@ onBeforeUnmount(() => {
 }
 
 .identify-text {
-  margin: 0;
+  margin: 0.3rem;
   text-align: center;
 }
 
