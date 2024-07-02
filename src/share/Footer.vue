@@ -26,10 +26,9 @@ import { RouterLink } from "vue-router";
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  background-color: #f8f8f8;
 }
 
-@media (min-width: 767px) {
+@media (min-width: 640px) {
   .footer-container {
     flex-direction: row;
     justify-content: space-between;

@@ -9,7 +9,7 @@ import MainNavigation from "./share/MainNavigation.vue";
 <template>
   <div class="wrapper">
     <div class="image">
-      <MainNavigation class="navagation" />
+      <MainNavigation class="navegation" />
       <Header />
     </div>
     <div class="router-container">
@@ -32,10 +32,12 @@ import MainNavigation from "./share/MainNavigation.vue";
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden; 
 }
-.navagation{
+.navegation{
   position: fixed;
   top: 0;
+  width: 100%; 
   z-index: 1000;
 }
 .router-container {

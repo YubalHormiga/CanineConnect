@@ -174,11 +174,11 @@ onMounted(() => {
 
 .pet-lost {
   text-transform: uppercase;
-  font-size: 5rem;
+  font-size:clamp(4rem, 4vw + 1.5rem, 13.25rem);
   font-weight: 900;
   color: red;
   opacity: 0.4;
-  letter-spacing: 8px;
+  letter-spacing: 3px;
   margin: 0;
   cursor: pointer;
 }

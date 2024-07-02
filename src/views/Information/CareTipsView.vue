@@ -30,7 +30,7 @@ import { RouterLink } from "vue-router"; // Importamos RouterLink para la navega
 }
 
 /* Estilos responsivos para el contenedor principal */
-@media (min-width: 767px) {
+@media (min-width: 640px) {
   .container {
     max-width: 120rem;
     margin: 0 auto;

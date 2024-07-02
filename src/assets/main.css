@@ -5,6 +5,7 @@
   /*Colores*/
   --text-100: #575757;
   --text-200: #2E2E2E;
+  --bg-0: #ffffff;
   --bg-100: #7F9E87;
   --bg-200: #64826c;
   --bg-300: #284431;
@@ -21,7 +22,6 @@
 html {
   box-sizing: border-box;
   font-size: 62.5%;
-  /* 1rem = 10px */
 }
 
 *,
@@ -38,9 +38,8 @@ html {
 body {
   min-height: 100vh;
   font-family: var(--primary-font);
-  background-color: var(--background-color);
+  background-color: var(--bg-0);
   font-size: 1.6rem;
-  /* 16px */
   font-optical-sizing: auto;
   line-height: 1.6;
   color: var(--text-200);
@@ -117,6 +116,8 @@ ol {
 }
 
 button {
+  border: none;
+  background: none;
   cursor: pointer;
 }
 

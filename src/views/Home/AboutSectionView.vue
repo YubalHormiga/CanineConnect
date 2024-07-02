@@ -112,7 +112,7 @@ const valueList = [
 .close-button {
   border: none;
   border-radius: 0.5rem;
-  background-color: var(--accent-100);
+  background-color: var(--accent-200);
   color:white;
   padding: 1rem;
   cursor: pointer;
@@ -122,7 +122,7 @@ const valueList = [
 
 .read-more-button:hover,
 .close-button:hover {
-  background-color:var(--accent-200);
+  background-color:var(--accent-100);
 
 }
 

@@ -55,7 +55,7 @@ const items = useItemsStore();
         </ol>
         <div class="report-link-container">
           <Link to="found-items" class="report-link">
-            Reportar Objeto Encontrado
+            Reportar Objeto
           </Link>
         </div>
       </section>

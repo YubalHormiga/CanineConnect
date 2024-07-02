@@ -47,7 +47,7 @@ const submitForm = async () => {
 .container {
   padding: 0 1rem;
 }
-@media (min-width: 767px) {
+@media (min-width: 640px) {
   .container {
     max-width: 120rem;
     margin: 0 auto;

@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
   align-items: center;
   padding: 0;
   width: 100%;
-  background-color: rgba(40, 68, 49, 0.4);
+  background-color: rgba(40, 68, 49, 0.3);
   transition: background-color 0.3s ease;
 }
 
@@ -227,8 +227,10 @@ onBeforeUnmount(() => {
 /* Elementos de navegación */
 .nav-items {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+
 }
 
 .nav-item {
@@ -299,7 +301,7 @@ onBeforeUnmount(() => {
   }
 }
 
-@media (min-width: 641px) {
+@media (min-width: 640px) {
   .nav-items {
     flex: 1;
     justify-content: center;

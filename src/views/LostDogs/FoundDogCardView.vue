@@ -3,10 +3,15 @@
 /* Importaciones de bibliotecas externas */
 import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
 /* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
 import { useAuthStore } from "@/stores/authStore";
+
+/* Importaciones de composable */
+import useLocationMap from "@/composables/useLocationMap";
 
 // Definir las propiedades esperadas para el componente
 const props = defineProps({
@@ -21,6 +26,7 @@ const showContent = ref(false);
 // Inicializar los stores necesarios
 const lostDogsStore = useLostDogsStore();
 const authStore = useAuthStore();
+const { zoom, pin } = useLocationMap();
 
 // Computed property para verificar si el usuario actual es el propietario del perro perdido
 const isOwner = computed(() => {
@@ -44,13 +50,31 @@ const isOwner = computed(() => {
           {{ lostDog.observations }}
         </p>
       </div>
+
       <div v-if="showContent">
         <!-- Encabezado de la tarjeta con botones de editar y eliminar si el usuario es el propietario -->
         <div class="card-header">
-          <div>
-            <p>Fecha de la desaparición : {{ lostDog.date }}</p>
-            <p>Email: {{ lostDog.email }}</p>
-            <p>Teléfono: {{ lostDog.phone }}</p>
+          <div class="map-container">
+            <LMap
+              ref="map"
+              v-model:zoom="zoom"
+              :center="[lostDog.map[0], lostDog.map[1]]"
+              :use-global-leaflet="false"
+            >
+              <LMarker
+                :lat-lng="[lostDog.map[0], lostDog.map[1]]"
+                draggable
+                @moveend="pin"
+              />
+              <LTileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              ></LTileLayer>
+            </LMap>
+          </div>
+          <div class="card-details">
+            <p><span>Fecha de la desaparición:</span> {{ lostDog.date }}</p>
+            <p><span>Email:</span> {{ lostDog.email }}</p>
+            <p><span>Teléfono:</span> {{ lostDog.phone }}</p>
           </div>
           <!-- Botón para editar el perro perdido -->
           <div class="buttons-container" v-if="isOwner">
@@ -134,6 +158,10 @@ const isOwner = computed(() => {
 </template>
 
 <style scoped>
+.map-container {
+  height: 15rem;
+  margin-bottom: 1rem;
+}
 /* Estilos específicos para el icono de eliminar */
 .custom-icon {
   cursor: pointer;
@@ -165,9 +193,9 @@ p {
 .card {
   display: grid;
   place-items: center;
-  width: 80vw;
+  width: 90vw;
   max-width: 25rem;
-  height: 38rem;
+  height: 50rem;
   overflow: hidden;
   border-radius: 0.625rem;
   box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
@@ -191,7 +219,7 @@ p {
   justify-content: space-between;
   align-self: flex-end;
   height: 100%;
-  padding: 30% 1.25rem 1.875rem;
+  padding: 15% 1.25rem 10.5rem;
   background: linear-gradient(
     180deg,
     hsla(0, 0%, 0%, 0) 0%,
@@ -209,7 +237,11 @@ p {
   width: fit-content;
   width: -moz-fit-content; /* Prefijo necesario para Firefox  */
 }
-
+.card-details span {
+  font-weight: 700;
+  text-decoration: underline;
+  color: var(--accent-100);
+}
 .card-title::after {
   content: "";
   position: absolute;
@@ -228,7 +260,7 @@ p {
   font-weight: bold;
   border-radius: 0.45em;
   border: none;
-  background-color: var(--accent-100);
+  background-color: var(--accent-200);
   font-size: 1.125rem;
   color: black;
 }
@@ -236,6 +268,9 @@ p {
 .card-button:focus {
   outline: 2px solid black;
   outline-offset: -5px;
+}
+.card-button:hover {
+  background-color: var(--accent-100);
 }
 
 @media (any-hover: hover) and (any-pointer: fine) {

@@ -37,12 +37,12 @@ const props = defineProps({
   outline: none;
   border-radius: 5px;
   border: none;
-  background-color:var(--accent-100);
+  background-color:var(--accent-200);
   box-shadow: 0 3px 1px -2px #ccc, 0 2px 2px 0 #ccc, 0 1px 5px 0 #ccc;
 }
 
 .css-button-shadow--sky:hover {
-  background-color: var(--accent-200); /* Cambia el color al hacer hover */
+  background-color: var(--accent-100); /* Cambia el color al hacer hover */
   box-shadow: 0 4px 2px -2px #bbb, 0 4px 4px 0 #bbb, 0 2px 6px 0 #bbb; /* Ajusta el shadow al hacer hover */
 }
 

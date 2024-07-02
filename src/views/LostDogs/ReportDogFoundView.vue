@@ -3,10 +3,11 @@
 /* Importaciones de bibliotecas externas */
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 /* Importaciones de componentes locales */
 import Link from "@/components/Link.vue";
-import Spinner from "@/components/Spinner.vue";
+import SpinnerDog from "@/components/SpinnerDog.vue";
 
 /* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
@@ -14,13 +15,13 @@ import { useAuthStore } from "@/stores/authStore.js";
 
 /* Importaciones de composables */
 import useImage from "@/composables/useImage";
-
+import useLocationMap from "@/composables/useLocationMap";
 // Importación de helpers
 import { limitCharacters } from '@/helpers';
 
 // Uso del composable useImage para manejar la carga de imágenes
 const { url, onFileChange, isImageUploaded, spinner } = useImage("lostDogs_images");
-
+const { center, zoom, pin, getUserLocation } = useLocationMap();
 // Uso de useRouter para la navegación programática
 const router = useRouter();
 
@@ -41,12 +42,13 @@ const formData = reactive({
 
 // Manejo del envío del formulario
 const handleSubmit = async (data) => {
-  const { image, ...values } = data;
+  const { image,map, ...values } = data;
   try {
     await lostDogsStore.addLostDog({
       ...values,
       userId: authStore.userData.uid,
       image: url.value,
+      map: center.value,
     });
     // Redirección a la página de "lost-dogs"
     router.push({ name: "lost-dogs" });
@@ -90,6 +92,27 @@ const handleLimitCharacters = (field, maxLength) => {
   <!-- Formulario para reportar mascota encontrada -->
   <div class="form">
     <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
+              <!-- Campos del formulario -->
+        <!-- Campos de Geolocalización -->
+        <div class="geolocation-container">
+          <button class="geolocation-button" @click="getUserLocation">
+            Obtener Ubicación
+          </button>
+          <p class="pin">o desplázate con el pin</p>
+        </div>
+        <div class="map-container">
+          <LMap
+            ref="map"
+            v-model:zoom="zoom"
+            :center="center"
+            :use-global-leaflet="false"
+          >
+            <LMarker :lat-lng="center" draggable @moveend="pin" />
+            <LTileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            ></LTileLayer>
+          </LMap>
+        </div>
       <!-- Campo para cargar imagen -->
       <FormKit
         type="file"
@@ -105,7 +128,7 @@ const handleLimitCharacters = (field, maxLength) => {
       />
       <!-- Spinner mientras se carga la imagen -->
       <div v-if="spinner" class="spinner">
-        <Spinner />
+        <SpinnerDog />
       </div>
       <!-- Previsualización de la imagen cargada -->
       <div v-else-if="isImageUploaded" class="image-container">
@@ -193,6 +216,34 @@ const handleLimitCharacters = (field, maxLength) => {
 </template>
 
 <style scoped>
+/* Estilos para geolocalización */
+.geolocation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.geolocation-button {
+  display: block;
+  border: none;
+  cursor: pointer;
+  color: #3367d6;
+}
+.geolocation-button:hover {
+  display: block;
+  cursor: pointer;
+  font-weight: 700;
+}
+.pin {
+  display: block;
+}
+
+/* Contenedor Mapa */
+.map-container {
+  height: 30rem;
+  margin-bottom: 2rem;
+}
 /* Estilos para el contenedor principal */
 .container {
   padding: 2rem;
