@@ -48,11 +48,7 @@ const buttonText = computed(() =>
   <div class="card">
     <!-- Contenedor de la imagen del objeto -->
     <div class="card-image-container">
-      <img
-        :src="item.image"
-        alt="Imagen del objeto perdido"
-        class="card-img"
-      />
+      <img :src="item.image" alt="Imagen del objeto perdido" class="card-img" />
     </div>
     <!-- Contenido de la tarjeta -->
     <div class="card-content">
@@ -60,13 +56,6 @@ const buttonText = computed(() =>
         <h2 class="card-title">{{ item.name }}</h2>
         <p class="card-description">{{ item.description }}</p>
         <div class="card-details">
-          <p class="card-text"><span>Fecha:</span> {{ item.date }}</p>
-          <p class="card-text"><span>Teléfono:</span> {{ item.phone }}</p>
-          <p class="card-text"><span>Email:</span> {{ item.email }}</p>
-          <p class="card-text-content">
-            <span>Observaciones: </span> {{ item.observations }}
-          </p>
-
           <div class="map-container">
             <LMap
               ref="map"
@@ -84,6 +73,12 @@ const buttonText = computed(() =>
               ></LTileLayer>
             </LMap>
           </div>
+          <p class="card-text"><span>Fecha:</span> {{ item.date }}</p>
+          <p class="card-text"><span>Teléfono:</span> {{ item.phone }}</p>
+          <p class="card-text"><span>Email:</span> {{ item.email }}</p>
+          <p class="card-text-content">
+            <span>Observaciones: </span> {{ item.observations }}
+          </p>
 
           <div class="card-header" v-if="isOwner">
             <div class="button-container">
@@ -229,9 +224,8 @@ p {
 .card-details span {
   font-weight: 700;
   text-decoration: underline;
-  color:var(--accent-100);
+  color: var(--accent-100);
 }
-
 
 .card:hover .card-details {
   display: flex;

@@ -23,7 +23,7 @@ const lostDogsStore = useLostDogsStore();
       Por favor, utiliza este formulario para proporcionar información sobre la mascota que has encontrado o perdido. Completa todos los campos obligatorios para ayudarnos a reunir al animal con su dueño o facilitar su búsqueda. Asegúrate de incluir detalles precisos y una imagen clara de la mascota si es posible.
     </p>
     <!-- Enlace para reportar una mascota encontrada -->
-    <div v-if="authStore.isAdmin" class="report-link-container" >
+    <div v-if="authStore.isAdmin" class="report-link-container" > <!--Modificar si queremos que no lo ean los usuarios-->
       <Link to="found-dogs" class="report-link">
         Reportar Mascota
       </Link>

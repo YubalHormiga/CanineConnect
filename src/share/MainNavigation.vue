@@ -14,7 +14,7 @@ const navItems = [
   { text: "Información", to: { name: "care" } },
   { text: "Adopción", to: { name: "adoption" } },
   { text: "Recursos", to: { name: "resources" } },
-  { text: "Blog", to: { name: "blog" } },
+  { text: "Historias Inspiradoras", to: { name: "inspiring-stories" } },
   { text: "Donar", to: { name: "donate" } },
   { text: "Chat", to: { name: "chat" } },
   // { text: "Administación", to: { name: "admin" } },

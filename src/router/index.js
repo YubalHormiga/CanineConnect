@@ -61,8 +61,8 @@ const router = createRouter({
       component: () => import("../views/ResourcesView.vue"),
     },
     {
-      path: "/blog",
-      name: "blog",
+      path: "/histoiras-inspiradoras",
+      name: "inspiring-stories",
       component: () => import("../views/BlogView.vue"),
     },
     {

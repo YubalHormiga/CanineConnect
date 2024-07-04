@@ -23,7 +23,7 @@ import MainNavigation from "./share/MainNavigation.vue";
 
 <style scoped>
 .image {
-  background-image: url("/images/dogs.jpg");
+  background-image: url("/images/dogs.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 33%;
@@ -32,18 +32,18 @@ import MainNavigation from "./share/MainNavigation.vue";
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
-.navegation{
+.navegation {
   position: fixed;
   top: 0;
-  width: 100%; 
+  width: 100%;
   z-index: 1000;
 }
 .router-container {
   flex: 1;
   margin-bottom: 1rem;
-  padding: 1rem
+  padding: 1rem;
 }
 
 .container {

@@ -226,14 +226,14 @@ const handleLimitCharacters = (field, maxLength) => {
 }
 .geolocation-button {
   display: block;
-  border: none;
-  cursor: pointer;
-  color: #3367d6;
+  font-weight: 600;
+  color: var(--text-100);
+  text-decoration: underline;
 }
 .geolocation-button:hover {
   display: block;
-  cursor: pointer;
-  font-weight: 700;
+  font-weight: 900;
+  color: var(--text-200);
 }
 .pin {
   display: block;

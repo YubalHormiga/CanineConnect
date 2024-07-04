@@ -255,23 +255,22 @@ p {
 .card-button {
   padding: 0.75em 1.6em;
   width: fit-content;
-  width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+  width: -moz-fit-content; 
   font-variant: small-caps;
   font-weight: bold;
   border-radius: 0.45em;
   border: none;
-  background-color: var(--accent-200);
+  background-color: var(--accent-100);
   font-size: 1.125rem;
   color: black;
+  margin-top: 1rem
 }
 
 .card-button:focus {
   outline: 2px solid black;
   outline-offset: -5px;
 }
-.card-button:hover {
-  background-color: var(--accent-100);
-}
+
 
 @media (any-hover: hover) and (any-pointer: fine) {
   .card-content {

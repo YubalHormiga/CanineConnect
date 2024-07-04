@@ -70,11 +70,13 @@ h1 {
 /* 24px */
 h2 {
   font-size: 2rem;
+  color: var(--text-200);
 }
 
 /* 20px */
 h3 {
   font-size: 1.8rem;
+  color: var(--text-100);
 }
 
 /* 18px */
@@ -135,3 +137,5 @@ svg {
   margin: 0 auto;
   max-width: var(--max-width);
 }
+
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
