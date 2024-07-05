@@ -116,7 +116,7 @@ const handleLimitCharacters = (field, maxLength) => {
             ></LTileLayer>
           </LMap>
         </div>
-
+        <!-- Imagen -->
         <FormKit
           type="file"
           label="Añade una imagen del objeto y espera a que se cargue"

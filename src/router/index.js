@@ -5,8 +5,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import HomeView from "../views/Home/HomeView.vue";
 import { useAuthStore } from "@/stores/authStore";
 
-
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   // linkActiveClass: "active",
@@ -63,7 +61,14 @@ const router = createRouter({
     {
       path: "/histoiras-inspiradoras",
       name: "inspiring-stories",
-      component: () => import("../views/BlogView.vue"),
+      component: () =>
+        import("../views/InspiringStories/InspiringStoriesView.vue"),
+    },
+    {
+      path: "/histoiras-inspiradoras/agregar",
+      name: "add-inspiring-story",
+      component: () =>
+        import("../views/InspiringStories/ReportInspireStoryView.vue"),
     },
     {
       path: "/objetos",
@@ -126,7 +131,6 @@ const router = createRouter({
       path: "/:catchAll(.*)*",
       component: () => import("../views/ErrorNotFound.vue"),
     },
-
   ],
 });
 

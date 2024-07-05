@@ -155,15 +155,13 @@ p {
   width: 100vw;
   max-width: 25rem;
   height: 50rem;
-  border-radius: 0.625rem;
   overflow: hidden;
+  border-radius: 0.625rem;
   box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.3s ease;
   margin: 1rem auto;
   display: flex;
   flex-direction: column;
-  border-radius: 0.625rem;
-  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
 }
 
 .card-image-container {
