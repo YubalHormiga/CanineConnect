@@ -98,7 +98,7 @@ const socialLinks = [
   margin-right: 1rem;
 }
 
-.cta-link {
+.cta-link, span {
   color: #000;
   text-decoration: none;
 }
