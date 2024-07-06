@@ -39,8 +39,9 @@ const props = defineProps({
         <span>Personalidad y Talentos:</span>
         {{ selectedStory?.dogPersonality }}
       </p>
-      <p>
-        <span>URL Web:</span>
+      <p class="url">
+        URL Web
+        <br />
         <a :href="selectedStory?.urlWeb" target="_blank">{{
           selectedStory?.urlWeb
         }}</a>
@@ -49,18 +50,27 @@ const props = defineProps({
   </div>
 </template>
 <style scoped>
-
 .modal-content {
   background-color: #fff;
-  margin: 5% auto;
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  max-width: 50rem;
+  width: 90%;
+  max-width: 45rem;
   border-radius: 8px;
   position: relative;
 }
-
+@media (min-width: 640px) {
+  .modal-content {
+    max-width: 65rem;
+  }
+}
+p span{
+  color: var(--accent-200)
+}
+.url {
+  text-align: center;
+}
 .close-button {
   color: #aaa;
   float: right;
@@ -101,7 +111,7 @@ const props = defineProps({
 }
 
 .modal-details a {
-  color: #007bff;
+  color: var(--accent-100);
   text-decoration: none;
 }
 

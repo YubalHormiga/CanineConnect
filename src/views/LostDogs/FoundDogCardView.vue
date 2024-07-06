@@ -171,7 +171,7 @@ const isOwner = computed(() => {
 .buttons-container {
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 2rem 0 0 ;
 }
 h2 {
   font-size: 2.25rem;
@@ -199,6 +199,7 @@ p {
   overflow: hidden;
   border-radius: 0.625rem;
   box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+ 
 }
 
 .card > * {
@@ -263,7 +264,8 @@ p {
   background-color: var(--accent-100);
   font-size: 1.125rem;
   color: black;
-  margin-top: 1rem
+  margin-top: 1rem;
+
 }
 
 .card-button:focus {

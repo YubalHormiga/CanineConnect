@@ -10,8 +10,8 @@ const props = defineProps({
 
 <template>
   <div class="card-container">
-    <h3 class="story-title">{{ story.storyTitle }}</h3>
-    <div>
+    <div class="story-image-container">
+      <h3 class="story-title">{{ story.storyTitle }}</h3>
       <img
         :src="story.image"
         :alt="story.storyTitle"
@@ -32,14 +32,22 @@ const props = defineProps({
   box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
+.card-container:hover{
+  transform: scale(1.05);
+  transition: transform 500ms ease-in;
+}
 h2 {
   display: inline-block;
+}
+.story-image-container{
+  padding: 1rem
 }
 .story-image {
   width: 10rem;
   height: 10rem;
   float: left;
   border-radius: 50%;
+  border: 3px solid var(--accent-100);
   margin: 0 10px 0 0; /* Agrega espacio alrededor de la imagen */
 }
 </style>

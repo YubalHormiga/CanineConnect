@@ -89,7 +89,6 @@ const items = useItemsStore();
 .steps-title,
 .list-title {
   text-align: center;
-  color: #2c3e50;
   margin-bottom: 1rem;
 }
 
@@ -107,6 +106,7 @@ const items = useItemsStore();
 
 .step-highlight {
   font-weight: bold;
+  color: var(--accent-200);
 }
 
 /* Estilos para la sección de objetos encontrados */

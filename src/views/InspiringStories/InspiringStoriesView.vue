@@ -64,8 +64,8 @@ const closeModal = () => {
     lugar mejor!
   </p>
 
-  <section class="inspiring-stories-section container">
-    <h1 class="stories-heading">Historias inspiradoras:</h1>
+  <section class="inspiring-stories-section ">
+    <h1 class="stories-heading">Historias inspiradoras</h1>
     <!-- Cada elemento de la lista representa una historia inspiradora -->
     <InspiringStoriesCard
       class="stories-list"
@@ -85,17 +85,14 @@ const closeModal = () => {
 </template>
 
 <style scoped>
+h1{
+  margin:1rem 0 ;
+  text-align: center;
+}
 .inspiring-stories-section {
   margin-bottom: 4rem;
 }
 
-h2 {
-  margin: 1rem 0 0;
-}
-
-span {
-  color: var(--accent-200);
-}
 
 .stories-list {
   cursor: pointer;

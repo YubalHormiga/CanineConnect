@@ -57,7 +57,7 @@ const socialLinks = [
         </template>
       </li>
       <li class="cta-item cta-media">
-        <span>¡Comparte nuestra página!</span>
+        <span>¡Comparte!</span>
         <!-- Enlace para compartir la página -->
         <div class="socialbtns">
           <ul>
@@ -78,8 +78,7 @@ const socialLinks = [
 </template>
 
 <style scoped>
-/* Importar Font Awesome para íconos sociales */
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
 
 .cta-heading {
   font-size: 24px;
@@ -94,6 +93,9 @@ const socialLinks = [
 .cta-media {
   display: flex;
   gap: 3rem;
+}
+.cta-media span{
+  margin-right: 1rem;
 }
 
 .cta-link {

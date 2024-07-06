@@ -54,7 +54,7 @@ const buttonText = computed(() =>
     <div class="card-content">
       <div class="card-content-inner">
         <h2 class="card-title">{{ item.name }}</h2>
-        <p class="card-description">{{ item.description }}</p>
+      
         <div class="card-details">
           <div class="map-container">
             <LMap
@@ -73,6 +73,7 @@ const buttonText = computed(() =>
               ></LTileLayer>
             </LMap>
           </div>
+          <p class="card-description">{{ item.description }}</p>
           <p class="card-text"><span>Fecha:</span> {{ item.date }}</p>
           <p class="card-text"><span>Teléfono:</span> {{ item.phone }}</p>
           <p class="card-text"><span>Email:</span> {{ item.email }}</p>
@@ -139,7 +140,7 @@ const buttonText = computed(() =>
 /* Contenedor Mapa */
 .map-container {
   height: 20rem;
-  margin-bottom: 1rem;
+  margin: 3rem 0 1rem;
 }
 
 p {
@@ -181,12 +182,7 @@ p {
   bottom: 0;
   width: 100%;
   height: 30%; /* Ajuste del alto del contenido visible */
-  background: linear-gradient(
-    180deg,
-    hsla(0, 0%, 0%, 0.2) 0%,
-    hsla(0, 0%, 0%, 0.5) 10%,
-    hsl(0, 0%, 0%, 0.8) 100%
-  );
+
   color: #fff;
   padding: 1rem;
   transition: all 0.3s ease;
@@ -196,8 +192,18 @@ p {
   transform: translateY(0);
 }
 
-.card:hover .card-content {
+.card:hover{
+  transform: scale(1.05);
+  transition: transform 500ms ease-in;
+}
+.card-content {
   height: 100%; /* Ocupa el 100% de la tarjeta al hacer hover */
+  background: linear-gradient(
+    180deg,
+    hsla(0, 0%, 0%, 0.05) 0%,
+    hsla(0, 0%, 0%, 0.5) 70%,
+    hsl(0, 0%, 0%, 0.8) 100%
+  );
 }
 
 .card-content-inner {
@@ -208,6 +214,7 @@ p {
   font-weight: bold;
   font-size: 2.25rem;
   margin-bottom: 0.5rem;
+  position: absolute;
 }
 
 .card-description {

@@ -144,7 +144,6 @@ const handleSubmit = async () => {
 <style>
 .chat-container {
   padding: 20px;
-  font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -168,8 +167,6 @@ const handleSubmit = async () => {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
   resize: none;
 }
 
@@ -229,7 +226,6 @@ const handleSubmit = async () => {
 }
 .message-datails {
   color: var(--bg-0);
-  font-size: 1rem;
 }
 .bg-100 {
   background-color: var(--bg-100);

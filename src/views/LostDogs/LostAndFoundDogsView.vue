@@ -46,7 +46,7 @@ const lostDogsStore = useLostDogsStore();
 
 <style scoped>
 /* Estilos para los títulos */
-h3 {
+h2, h3 {
   text-align: center;
 }
 
@@ -70,6 +70,6 @@ h3 {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap:2rem
 }
 </style>
