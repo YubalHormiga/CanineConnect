@@ -1,5 +1,5 @@
-# CanineConnect: Contenido que Enamora y Ayuda
-
+# CanineConnect: Contenido que Enamora y Ayuda 
+## En construcción
 Bienvenido a nuestro proyecto en construcción. Nos apasionan los perros y estamos comprometidos con su bienestar. En nuestra página encontrán:
 
 - **Misión y Valores:** Descubre por qué amamos a los perros y cuáles son nuestros valores fundamentales.
