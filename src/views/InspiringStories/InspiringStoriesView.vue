@@ -27,7 +27,7 @@ const closeModal = () => {
     >Agrega tu Historia</Link
   >
 
-  <h2>Un mundo de amor, lealtad y heroísmo te espera</h2>
+  <h1>Un mundo de amor, lealtad y heroísmo te espera</h1>
 
   <p>
     Adéntrate en un espacio donde la bondad canina brilla con luz propia.
@@ -63,7 +63,7 @@ const closeModal = () => {
   </p>
 
   <section class="inspiring-stories-section">
-    <h3 class="stories-heading">Historias inspiradoras</h3>
+    <h1 class="stories-heading">Historias inspiradoras</h1>
     <!-- Cada elemento de la lista representa una historia inspiradora -->
     <InspiringStoriesCard
       class="stories-list"
@@ -83,7 +83,7 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-h2 {
+h1 {
   margin: 1rem 0;
   text-align: center;
 }

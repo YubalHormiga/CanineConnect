@@ -1,10 +1,9 @@
 /* main.css */
-/* Importar Font Awesome para íconos sociales */
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
+
 
 /* Variables */
 :root {
-  /*Colores*/
+  /* Colores */
   --text-100: #575757;
   --text-200: #2E2E2E;
   --bg-0: #ffffff;
@@ -13,9 +12,9 @@
   --bg-300: #284431;
   --accent-100: #F2C057;
   --accent-200: #886300;
+  --primary-color: #007bff; /* Define tu color primario */
 
-
-  /* OTROS */
+  /* Otros */
   --primary-font: 'Roboto', sans-serif;
   --max-width: 120rem;
 }
@@ -42,11 +41,9 @@ body {
   font-family: var(--primary-font);
   background-color: var(--bg-0);
   font-size: 1.6rem;
-  font-optical-sizing: auto;
   line-height: 1.6;
   color: var(--text-100);
   hyphens: auto;
-
 }
 
 input,
@@ -70,39 +67,31 @@ h1 {
   font-size: 2.4rem;
 }
 
-/* 24px */
 h2 {
   font-size: 2rem;
-  color: var(--accent-100);
-}
-
-/* 20px */
-h3 {
-  font-size: 1.8rem;
   color: var(--accent-200);
 }
 
-/* 18px */
+h3 {
+  font-size: 1.8rem;
+  color: var(--text-100);
+}
+
 h4 {
   font-size: 1.6rem;
 }
 
-/* 16px */
 h5 {
   font-size: 1.4rem;
 }
 
-/* 14px */
 h6 {
   font-size: 1.2rem;
 }
 
-/* 12px */
-
 p {
   font-size: 1.6rem;
   line-height: 1.5;
-
 }
 
 a {
@@ -131,7 +120,6 @@ video,
 svg {
   height: auto;
   max-width: 100%;
-  /* width: 100%; */
   display: block;
 }
 
@@ -140,5 +128,3 @@ svg {
   margin: 0 auto;
   max-width: var(--max-width);
 }
-
-@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
