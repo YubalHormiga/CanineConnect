@@ -25,7 +25,7 @@ const closeModal = () => {
 
 <template>
   <section class="inspiring-stories-section">
-    <h1 class="stories-heading">Historias inspiradoras:</h1>
+    <h2 class="stories-heading">Historias inspiradoras:</h2>
     <InspiringStoriesCard
       class="stories-list"
       v-for="story in storyStore.storiesCollection.slice(0, 5)"

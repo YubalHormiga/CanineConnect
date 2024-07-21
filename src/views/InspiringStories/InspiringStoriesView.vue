@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import { useStoryStore } from "@/stores/storyStore";
 import { useAuthStore } from "@/stores/authStore";
 
@@ -6,11 +7,8 @@ import InspiringStoriesCard from "./InspiringStoriesCard.vue";
 import InspiringStoriesModal from "./InspiringStoriesModal.vue";
 import Link from "@/components/Link.vue";
 
-import { ref } from "vue";
-
 const storyStore = useStoryStore();
 const authStore = useAuthStore();
-
 const showModal = ref(false);
 const selectedStory = ref(null);
 
@@ -29,7 +27,7 @@ const closeModal = () => {
     >Agrega tu Historia</Link
   >
 
-  <h1>Un mundo de amor, lealtad y heroísmo te espera</h1>
+  <h2>Un mundo de amor, lealtad y heroísmo te espera</h2>
 
   <p>
     Adéntrate en un espacio donde la bondad canina brilla con luz propia.
@@ -64,8 +62,8 @@ const closeModal = () => {
     lugar mejor!
   </p>
 
-  <section class="inspiring-stories-section ">
-    <h1 class="stories-heading">Historias inspiradoras</h1>
+  <section class="inspiring-stories-section">
+    <h3 class="stories-heading">Historias inspiradoras</h3>
     <!-- Cada elemento de la lista representa una historia inspiradora -->
     <InspiringStoriesCard
       class="stories-list"
@@ -75,7 +73,7 @@ const closeModal = () => {
       @click="openModal(story)"
     />
     <!-- Modal -->
-    <div class="modal" v-if="showModal" @click.self="closeModal">
+    <div class="modal" v-if="showModal">
       <InspiringStoriesModal
         :selectedStory="selectedStory"
         @click="closeModal"
@@ -85,14 +83,13 @@ const closeModal = () => {
 </template>
 
 <style scoped>
-h1{
-  margin:1rem 0 ;
+h2 {
+  margin: 1rem 0;
   text-align: center;
 }
 .inspiring-stories-section {
   margin-bottom: 4rem;
 }
-
 
 .stories-list {
   cursor: pointer;
@@ -109,5 +106,4 @@ h1{
   background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
   overflow: auto; /* Permitir desplazamiento si el contenido es largo */
 }
-
 </style>

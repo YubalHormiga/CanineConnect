@@ -5,11 +5,13 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["closeModal"]);
 </script>
 
 <template>
   <div class="modal-content">
-    <span class="close-button" @click="closeModal">&times;</span>
+    <span class="close-button" @click="$emit('closeModal')">&times;</span>
     <img
       :src="selectedStory?.image"
       :alt="selectedStory?.storyTitle"
@@ -62,11 +64,11 @@ const props = defineProps({
 }
 @media (min-width: 640px) {
   .modal-content {
-    max-width: 65rem;
+    max-width: 55rem;
   }
 }
-p span{
-  color: var(--accent-200)
+p span {
+  color: var(--accent-200);
 }
 .url {
   text-align: center;

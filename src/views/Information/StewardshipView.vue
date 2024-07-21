@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Introducción a la Tenencia Responsable de Perros</h1>
+    <h2>Introducción a la Tenencia Responsable de Perros</h2>
     <p>
       En nuestra comunidad, creemos firmemente en promover la tenencia
       responsable de perros como un compromiso vital para garantizar su salud,
@@ -16,7 +16,7 @@
       este viaje hacia una tenencia responsable y satisfactoria de perros!
     </p>
     <article>
-      <h2>Alimentación adecuada:</h2>
+      <h3>Alimentación adecuada:</h3>
       <p>
         Proporcionar una alimentación adecuada es crucial para la salud y el
         bienestar de tu perro. La dieta debe adaptarse a sus necesidades
@@ -39,7 +39,7 @@
       </p>
     </article>
     <article>
-      <h2>Alojamiento adecuado:</h2>
+      <h3>Alojamiento adecuado:</h3>
       <p>
         El alojamiento de tu perro es fundamental para su bienestar físico y
         emocional. Ya sea que tu perro viva dentro de casa o en un área
@@ -63,7 +63,7 @@
       </p>
     </article>
     <article>
-      <h2>Cuidado veterinario:</h2>
+      <h3>Cuidado veterinario:</h3>
       <p>
         El cuidado veterinario regular es esencial para garantizar la salud y el
         bienestar a largo plazo de tu perro. Programa visitas periódicas al
@@ -87,7 +87,7 @@
       </p>
     </article>
     <article>
-      <h2>Ejercicio y estimulación:</h2>
+      <h3>Ejercicio y estimulación:</h3>
       <p>
         El ejercicio regular es fundamental para mantener a tu perro en buena
         forma física y mental. La cantidad y tipo de ejercicio variarán según la
@@ -111,7 +111,7 @@
       </p>
     </article>
     <article>
-      <h2>Educación y entrenamiento:</h2>
+      <h3>Educación y entrenamiento:</h3>
       <p>
         El entrenamiento adecuado es esencial para desarrollar buenos hábitos y
         un comportamiento socialmente aceptable en tu perro. Utiliza métodos de
@@ -134,7 +134,7 @@
       </p>
     </article>
     <article>
-      <h2>Identificación y control:</h2>
+      <h3>Identificación y control:</h3>
       <p>
         La identificación adecuada y el control responsable son fundamentales
         para la seguridad de tu perro y su retorno seguro en caso de pérdida.
@@ -157,7 +157,7 @@
       </p>
     </article>
     <article>
-      <h2>Bienestar emocional:</h2>
+      <h3>Bienestar emocional:</h3>
       <p>
         El bienestar emocional de tu perro es tan importante como su salud
         física. Los perros son animales sociales que necesitan afecto, atención
@@ -172,10 +172,10 @@
 <script setup></script>
 
 <style scoped>
-h1 {
+h2 {
   text-align: center;
 }
-h2{
+h3{
     margin: 2rem 0 1rem 0;
     color: var(--accent-200)
 }

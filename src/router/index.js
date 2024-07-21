@@ -50,7 +50,17 @@ const router = createRouter({
     {
       path: "/adopcion",
       name: "adoption",
-      component: () => import("../views/AdoptionView.vue"),
+      component: () => import("../views/Adoption/AdoptionView.vue"),
+    },
+    {
+      path: "/adopcion/agregar",
+      name: "add-adoption",
+      component: () => import("../views/Adoption/ReportAdoptionView.vue"),
+    },
+    {
+      path: "/adopcion/listado",
+      name: "adoption-list",
+      component: () => import("../views/Adoption/ListDogsAdoption.vue"),
     },
 
     {
@@ -59,13 +69,13 @@ const router = createRouter({
       component: () => import("../views/ResourcesView.vue"),
     },
     {
-      path: "/histoiras-inspiradoras",
+      path: "/historias-inspiradoras",
       name: "inspiring-stories",
       component: () =>
         import("../views/InspiringStories/InspiringStoriesView.vue"),
     },
     {
-      path: "/histoiras-inspiradoras/agregar",
+      path: "/historias-inspiradoras/agregar",
       name: "add-inspiring-story",
       component: () =>
         import("../views/InspiringStories/ReportInspireStoryView.vue"),
@@ -86,7 +96,7 @@ const router = createRouter({
       component: () => import("../views/Items/EditFoundItemView.vue"),
     },
     {
-      path: "/donate",
+      path: "/donar",
       name: "donate",
       component: () => import("../views/DonationView.vue"),
     },

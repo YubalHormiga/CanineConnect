@@ -41,19 +41,15 @@ const socialLinks = [
 
 <template>
   <section class="call-to-action-section">
-    <h1 class="cta-heading">¿Quieres ayudar?</h1>
+    <h2 class="cta-heading">¿Quieres ayudar?</h2>
     <ul class="cta-list">
       <!-- Iterar sobre los enlaces principales -->
       <li v-for="link in mainLinks" :key="link.text" class="cta-item">
         <template v-if="link.external">
-          <a :href="link.href" target="_blank" class="cta-link">{{
-            link.text
-          }}</a>
+          <a :href="link.href" target="_blank" class="cta-link">{{ link.text }}</a>
         </template>
         <template v-else>
-          <RouterLink :to="{ name: link.name }" class="cta-link">{{
-            link.text
-          }}</RouterLink>
+          <RouterLink :to="{ name: link.name }" class="cta-link">{{ link.text }}</RouterLink>
         </template>
       </li>
       <li class="cta-item cta-media">
@@ -68,7 +64,10 @@ const socialLinks = [
                 :class="link.iconClass"
                 :aria-label="link.alt"
                 target="_blank"
-              ></a>
+              >
+               <!-- Enlace visible para accesibilidad -->
+               <span class="sr-only">{{ link.alt }}</span>
+            </a>
             </li>
           </ul>
         </div>
@@ -77,8 +76,20 @@ const socialLinks = [
   </section>
 </template>
 
-<style scoped>
 
+
+<style scoped>
+/* Estilo para ocultar el texto visible pero accesible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 
 .cta-heading {
   font-size: 24px;
@@ -137,3 +148,7 @@ const socialLinks = [
 }
 
 </style>
+
+
+
+

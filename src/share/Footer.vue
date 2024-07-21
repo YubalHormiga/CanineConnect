@@ -32,7 +32,10 @@ const socialLinks = [
               :class="link.iconClass"
               :alt="link.alt"
               target="_blank"
-            ></a>
+            >
+              <!-- Enlace visible para accesibilidad -->
+              <span class="sr-only">{{ link.alt }}</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -51,6 +54,17 @@ const socialLinks = [
 </template>
 <!-- Se ha añadido un esquema de microdatos usando itemscope y itemtype para definir el WPFooter. También se ha añadido itemprop a los elementos relevantes para indicar el titular del copyright y las URLs. -->
 <style scoped>
+/* Estilo para ocultar el texto visible pero accesible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 .media {
   display: flex;
   justify-content: center;

@@ -23,7 +23,7 @@ import MainNavigation from "./share/MainNavigation.vue";
 
 <style scoped>
 .image {
-  background-image: url("/images/dogs.webp");
+  background-image: url("../src/assets/images/dogs.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 33%;

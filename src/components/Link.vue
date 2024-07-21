@@ -24,7 +24,7 @@ const props = defineProps({
 }
 
 .css-button-shadow--sky {
-  min-width: 130px;
+  min-width: 90px;
   height: 40px;
   text-decoration: none;
   color: #fff;
@@ -39,6 +39,7 @@ const props = defineProps({
   border: none;
   background-color:var(--accent-200);
   box-shadow: 0 3px 1px -2px #ccc, 0 2px 2px 0 #ccc, 0 1px 5px 0 #ccc;
+  text-align: center
 }
 
 .css-button-shadow--sky:hover {

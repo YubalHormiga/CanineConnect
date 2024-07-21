@@ -6,6 +6,10 @@ import { RouterLink } from "vue-router";
 import "leaflet/dist/leaflet.css";
 import { LMap, LTileLayer, LMarker } from "@vue-leaflet/vue-leaflet";
 
+/* Importaciones de componentes locales */
+import EditIcon from "../../assets/icons/EditIcon.vue";
+import DeleteIcon from "../../assets/icons/DeleteIcon.vue";
+
 /* Importaciones de stores */
 import { useLostDogsStore } from "@/stores/lostDogsStore";
 import { useAuthStore } from "@/stores/authStore";
@@ -82,24 +86,7 @@ const isOwner = computed(() => {
               <router-link
                 :to="{ name: 'edit-lostDog-found', params: { id: lostDog.id } }"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-pencil"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffbf00"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path
-                    d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"
-                  />
-                  <path d="M13.5 6.5l4 4" />
-                </svg>
+                <EditIcon />
               </router-link>
             </div>
             <!-- Botón para eliminar el perro perdido -->
@@ -110,25 +97,7 @@ const isOwner = computed(() => {
                 role="button"
                 tabindex="0"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-trash"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffbf00"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M4 7l16 0" />
-                  <path d="M10 11l0 6" />
-                  <path d="M14 11l0 6" />
-                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                </svg>
+                <DeleteIcon />
               </div>
             </div>
           </div>
@@ -171,7 +140,7 @@ const isOwner = computed(() => {
 .buttons-container {
   display: flex;
   justify-content: space-between;
-  padding: 2rem 0 0 ;
+  padding: 2rem 0 0;
 }
 h2 {
   font-size: 2.25rem;
@@ -199,7 +168,6 @@ p {
   overflow: hidden;
   border-radius: 0.625rem;
   box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
- 
 }
 
 .card > * {
@@ -256,7 +224,7 @@ p {
 .card-button {
   padding: 0.75em 1.6em;
   width: fit-content;
-  width: -moz-fit-content; 
+  width: -moz-fit-content;
   font-variant: small-caps;
   font-weight: bold;
   border-radius: 0.45em;
@@ -265,14 +233,12 @@ p {
   font-size: 1.125rem;
   color: black;
   margin-top: 1rem;
-
 }
 
 .card-button:focus {
   outline: 2px solid black;
   outline-offset: -5px;
 }
-
 
 @media (any-hover: hover) and (any-pointer: fine) {
   .card-content {

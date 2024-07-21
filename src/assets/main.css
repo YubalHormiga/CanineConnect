@@ -63,7 +63,6 @@ h4,
 h5,
 h6 {
   font-family: var(--primary-font);
-  margin: 0 0 2rem 0;
   font-weight: 700;
 }
 
@@ -103,7 +102,7 @@ h6 {
 p {
   font-size: 1.6rem;
   line-height: 1.5;
- 
+
 }
 
 a {

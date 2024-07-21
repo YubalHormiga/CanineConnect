@@ -6,33 +6,28 @@ import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/authStore";
 
-// Definición de los elementos de navegación
 const navItems = [
   { text: "Inicio", to: "/" },
   { text: "Peludos Perdidos", to: { name: "lost-dogs" } },
   { text: "Objetos Perdidos", to: { name: "lost-items" } },
-  { text: "Información", to: { name: "care" } },
   { text: "Adopción", to: { name: "adoption" } },
-  { text: "Recursos", to: { name: "resources" } },
+  /* { text: "Recursos", to: { name: "resources" } },*/
   { text: "Historias Inspiradoras", to: { name: "inspiring-stories" } },
-  { text: "Donar", to: { name: "donate" } },
   { text: "Chat", to: { name: "chat" } },
-  // { text: "Administación", to: { name: "admin" } },
+  { text: "Donar", to: { name: "donate" } },
+  { text: "Información", to: { name: "care" } },
 ];
 
-// Uso del store de autenticación
 const authStore = useAuthStore();
-
 const route = useRoute();
 const { isLoggedIn, userData, isAdmin } = storeToRefs(authStore);
 const { logoutUser } = authStore;
 const isMenuOpen = ref(false);
-// Función para alternar el menú
+
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 
-// Función para cerrar el menú al hacer clic fuera de él
 const closeMenu = (event) => {
   if (!event.target.closest(".navigation")) {
     isMenuOpen.value = false;
@@ -51,19 +46,23 @@ onBeforeUnmount(() => {
 <template>
   <div class="nav-container" :class="{ open: isMenuOpen }">
     <nav class="navigation">
-      <!-- Sección izquierda: Menú hamburguesa -->
       <div class="left-section">
         <div
           class="hamburger-menu"
+          :class="{ open: isMenuOpen }"
           @click="toggleMenu"
           aria-label="Toggle Menu"
         >
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+          <span class="bar bar1"></span>
+          <span class="bar bar2"></span>
+          <span class="bar bar3"></span>
         </div>
       </div>
-      <!-- Sección central: Elementos de navegación -->
+      <div v-if="isLoggedIn && route.name !== 'login'" class="welcome-content">
+        <p>
+          Hola: <span> {{ userData?.displayName ?? "Usuario" }}</span>
+        </p>
+      </div>
       <div :class="['nav-items', { open: isMenuOpen }]">
         <div class="nav-item" v-for="(item, index) in navItems" :key="index">
           <router-link
@@ -73,7 +72,6 @@ onBeforeUnmount(() => {
             >{{ item.text }}</router-link
           >
         </div>
-        <!-- Enlace de administración visible solo para administradores -->
         <div v-if="isAdmin" class="nav-item">
           <router-link
             active-class="active-link"
@@ -83,19 +81,15 @@ onBeforeUnmount(() => {
           >
         </div>
       </div>
-      <!-- Sección derecha: Bienvenida y cierre de sesión -->
-      <div class="center-section" v-if="isLoggedIn && route.name !== 'login'">
-        <div class="welcome-content">
-          <span>{{ userData?.displayName ?? "Usuario" }}</span>
-        </div>
-      </div>
+
       <div class="right-section">
         <div v-if="isLoggedIn && route.name !== 'login'" class="logout-link">
           <router-link
             class="logoutUser"
             @click="logoutUser"
             :to="{ name: 'home' }"
-            ><svg
+          >
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-logout"
               width="32"
@@ -112,8 +106,9 @@ onBeforeUnmount(() => {
                 d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
               />
               <path d="M9 12h12l-3 -3" />
-              <path d="M18 15l3 -3" /></svg
-          ></router-link>
+              <path d="M18 15l3 -3" />
+            </svg>
+          </router-link>
         </div>
         <div
           v-else-if="route.name !== 'login' && route.name !== 'register'"
@@ -151,7 +146,80 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-/* Contenedor principal de la navegación */
+/* Hamburguer */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu .bar {
+  width: 30px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.hamburger-menu.open .bar1 {
+  transform: rotate(45deg) translate(10px, 8px);
+}
+
+.hamburger-menu.open .bar2 {
+  opacity: 0;
+}
+
+.hamburger-menu.open .bar3 {
+  transform: rotate(-45deg) translate(10px, -8px);
+}
+
+@media (max-width: 640px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .nav-items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    flex-direction: column;
+    background-color: rgba(40, 68, 49, 0.3);
+    width: 100%;
+    display: none;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
+    max-height: 0;
+  }
+
+  .nav-items.open {
+    display: flex;
+    max-height: max-content;
+  }
+
+  .nav-item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .left-section,
+  .right-section {
+    flex: 1;
+  }
+
+  .right-section {
+    justify-content: flex-end;
+  }
+
+  .welcome-content,
+  .logout-link,
+  .login-container {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+}
+
+/* Resto del CSS */
 .nav-container {
   display: flex;
   justify-content: space-between;
@@ -162,7 +230,6 @@ onBeforeUnmount(() => {
   transition: background-color 0.3s ease;
 }
 
-/* Navegación */
 .navigation {
   display: flex;
   flex-wrap: wrap;
@@ -173,64 +240,45 @@ onBeforeUnmount(() => {
   z-index: 10000;
 }
 
-/* Secciones */
 .left-section,
-.center-section,
 .right-section {
   display: flex;
   align-items: center;
   margin-left: 0.3rem;
 }
 
-.center-section {
-  flex: 1;
-  justify-content: center;
-  text-align: center;
-}
-
 .right-section {
   justify-content: flex-end;
-}
-@media (min-width: 640px) {
-  .right-section {
-    justify-content: flex-end;
-    padding-right: 1rem;
-  }
-}
-
-.welcome-content,
-.logout-link,
-.login-container {
-  margin-left: 1rem;
 }
 
 .logout-link,
 .login-container {
   display: flex;
+  margin: 0.5rem;
 }
 
-/* Menú hamburguesa */
-.hamburger-menu {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
+.welcome-content {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0.3rem;
+  color: var(--bg-0);
 }
 
-.hamburger-menu .bar {
-  width: 30px;
-  height: 3px;
-  background-color: #ffffff;
-  margin: 4px 0;
-  transition: 0.4s;
+.welcome-content span {
+  color: var(--accent-100);
 }
 
-/* Elementos de navegación */
 .nav-items {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+  transition: max-height 0.3s ease;
+}
 
+.nav-items.open {
+  max-height: max-content;
 }
 
 .nav-item {
@@ -250,57 +298,6 @@ onBeforeUnmount(() => {
   font-weight: 700;
 }
 
-/* Media Queries para diferentes tamaños de pantalla */
-@media (max-width: 640px) {
-  .hamburger-menu {
-    display: flex;
-  }
-
-  .nav-items {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.4);
-    width: 100%;
-    display: none;
-    transition: max-height 0.3s ease;
-    overflow: hidden;
-    max-height: 0;
-  }
-
-  .nav-items.open {
-    display: flex;
-    max-height: max-content;
-  }
-
-  .nav-item {
-    width: 100%;
-    text-align: center;
-  }
-
-  .left-section,
-  .right-section,
-  .center-section {
-    flex: 1;
-  }
-
-  .center-section {
-    justify-content: center;
-  }
-
-  .right-section {
-    justify-content: flex-end;
-  }
-
-  .welcome-content,
-  .logout-link,
-  .login-container {
-    margin-left: 0;
-    margin-right: 1rem;
-  }
-}
-
 @media (min-width: 640px) {
   .nav-items {
     flex: 1;
@@ -311,44 +308,12 @@ onBeforeUnmount(() => {
     display: none;
   }
 
-  .center-section {
-    display: none;
-  }
-
   .right-section {
     flex: none;
   }
-}
 
-/* Estilos para el enlace de inicio de sesión */
-.login-link {
-  text-decoration: none;
-  color: #ffffff;
-  text-align: center;
-}
-
-.login-link:hover {
-  text-decoration: underline;
-}
-
-.identify-text {
-  margin: 0.3rem;
-  text-align: center;
-}
-
-/* Estilos para el enlace de cerrar sesión */
-.logoutUser {
-  text-decoration: none;
-  color: #ffffff;
-  text-align: center;
-}
-
-.logoutUser:hover {
-  text-decoration: underline;
-}
-
-.welcome-content {
-  color: #ffffff;
-  text-align: center;
+  .welcome-content {
+    display: flex;
+  }
 }
 </style>
