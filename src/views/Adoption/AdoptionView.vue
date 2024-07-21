@@ -70,7 +70,7 @@ const authStore = useAuthStore();
         title="Ver perros disponibles para adopción"
       >
         <div class="content-icon-header">
-          <img src="../../assets/icons/Dog.webp" alt="Adoption" />
+          <img src="@/assets/icons/Dog.webp" alt="Adoption" />
           <span>Ver perros en adopción</span>
         </div>
       </RouterLink>
