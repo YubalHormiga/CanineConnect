@@ -34,6 +34,9 @@ const closeMenu = (event) => {
   }
 };
 
+const darkMode = ()=>{
+  document.body.classList.toggle('darkMode')
+}
 onMounted(() => {
   document.addEventListener("click", closeMenu);
 });
@@ -63,6 +66,9 @@ onBeforeUnmount(() => {
           Hola: <span> {{ userData?.displayName ?? "Usuario" }}</span>
         </p>
       </div>
+      <!-- <div class="darkModeIcon" @click="darkMode">
+        <img src="../assets/icons/dark-mode.svg" alt="darkMode" />
+      </div> -->
       <div :class="['nav-items', { open: isMenuOpen }]">
         <div class="nav-item" v-for="(item, index) in navItems" :key="index">
           <router-link
@@ -146,6 +152,16 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+/* DarkMode */
+.darkModeIcon{
+  width: 3rem;
+  height: auto;
+  filter: invert(100%);
+  cursor: pointer;
+  margin-left: 1rem; 
+  /* visibility: hidden; */
+  
+}
 /* Hamburguer */
 .hamburger-menu {
   display: none;

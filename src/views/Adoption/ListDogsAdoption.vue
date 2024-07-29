@@ -1,4 +1,38 @@
-<script setup></script>
+<script setup>
+import { useAdoptionStore } from "@/stores/adoptionStore";
+import AdoptionCardView from "./AdoptionCardView.vue";
+import { ref, computed } from "vue";
+
+const adoptionStore = useAdoptionStore();
+
+const selectedGender = ref("indifferent");
+const selectedCategory = ref("En adopción");
+
+const sexSelect = (e) => {
+  selectedGender.value = e.target.value;
+};
+
+const categorySelect = (e) => {
+  selectedCategory.value = e.target.value;
+};
+
+const filteredAdoptions = computed(() => {
+  // Filtrar por género
+  const genderFiltered =
+    selectedGender.value === "indifferent"
+      ? adoptionStore.adoptionsCollection
+      : adoptionStore.adoptionsCollection.filter(
+          (adoption) => adoption.sex === selectedGender.value
+        );
+
+  // Filtrar por categoría
+  const categoryFiltered = genderFiltered.filter(
+    (adoption) => adoption.adoptionStatus === selectedCategory.value
+  );
+
+  return categoryFiltered;
+});
+</script>
 
 <template>
   <div class="adoption-container">
@@ -8,31 +42,58 @@
         <div class="categories">
           <div>
             <label>
-              <input type="radio" name="category" value="InAdoption" /> En
-              adopción
+              <input
+                type="radio"
+                name="category"
+                value="En adopción"
+                @change="categorySelect"
+                checked
+              />
+              En adopción
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" name="category" value="DoubleAdoptions" />
+              <input
+                type="radio"
+                name="category"
+                value="Adopciones dobles"
+                @change="categorySelect"
+              />
               Adopciones dobles
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" name="category" value="InFosterCare" /> En
-              acogida
+              <input
+                type="radio"
+                name="category"
+                value="En acogida"
+                @change="categorySelect"
+              />
+              En acogida
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" name="category" value="SpecialCases" /> Casos
-              especiales
+              <input
+                type="radio"
+                name="category"
+                value="Casos especiales"
+                @change="categorySelect"
+              />
+              Casos especiales
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" name="category" value="Adopted" /> Adoptados
+              <input
+                type="radio"
+                name="category"
+                value="Adoptados"
+                @change="categorySelect"
+              />
+              Adoptados
             </label>
           </div>
         </div>
@@ -42,141 +103,72 @@
         <div class="gender">
           <div>
             <label>
-              <input type="radio" name="category" value="indifferent " />
+              <input
+                type="radio"
+                name="gender"
+                value="indifferent"
+                @change="sexSelect"
+                checked
+              />
               Indiferente
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" name="gender" value="male" /> Masculino
+              <input
+                type="radio"
+                name="gender"
+                value="Macho"
+                @change="sexSelect"
+              />
+              Masculino
             </label>
           </div>
           <div>
             <label>
-              <input type="radio" name="gender" value="female" />
+              <input
+                type="radio"
+                name="gender"
+                value="Hembra"
+                @change="sexSelect"
+              />
               Femenino
             </label>
           </div>
         </div>
       </section>
     </div>
-    <div class="list-dogs">
-      <div class="card-container">
-        <div class="image-container">
-          <img src="../../../public/dog1.jpg" alt="perro1" />
-        </div>
-        <div class="text-container">
-          <p class="name">Nombre</p>
-          <p class="waiting">Ellos también Esperan</p>
-          <p class="needs">Una familia con experiencia</p>
-        </div>
-        <div class="button-container">
-          <button class="more-info">Más Información</button>
-        </div>
-      </div>
-      <div class="card-container">
-        <div class="image-container">
-          <img src="../../../public/dog2.jpg" alt="perro1" />
-        </div>
-        <div class="text-container">
-          <p class="name">Nombre</p>
-          <p class="waiting">Ellos también Esperan</p>
-          <p class="needs">Una familia con experiencia</p>
-        </div>
-        <div class="button-container">
-          <button class="more-info">Más Información</button>
-        </div>
-      </div>
-      <div class="card-container">
-        <div class="image-container">
-          <img src="../../../public/dog3.jpg" alt="perro1" />
-        </div>
-        <div class="text-container">
-          <p class="name">Nombre</p>
-          <p class="waiting">Ellos también Esperan</p>
-          <p class="needs">Una familia con experiencia</p>
-        </div>
-        <div class="button-container">
-          <button class="more-info">Más Información</button>
-        </div>
-      </div>
-      <div class="card-container">
-        <div class="image-container">
-          <img src="../../../public/dog4.jpg" alt="perro1" />
-        </div>
-        <div class="text-container">
-          <p class="name">Nombre</p>
-          <p class="waiting">Ellos también Esperan</p>
-          <p class="needs">Una familia con experiencia</p>
-        </div>
-        <div class="button-container">
-          <button class="more-info">Más Información</button>
-        </div>
-      </div>
+    <div class="adoptionCardView">
+      <AdoptionCardView
+        v-for="adoption in filteredAdoptions"
+        :key="adoption.id"
+        :adoption="adoption"
+      />
     </div>
   </div>
 </template>
-<style scoped>
-.adoption-container {
 
+<style scoped>
+.section {
+  margin: 0 2rem 2rem 0;
+}
+.adoptionCardView {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 @media (min-width: 640px) {
   .adoption-container {
     display: flex;
   }
 }
-.list-dogs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
+
 .categories-container {
 }
 .categories {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.gender-container {
-  margin-bottom: 2rem
-
-    
-}
-.gender {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.card-container {
-  width: 25rem;
-  overflow: hidden;
-  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
-  margin-bottom: 1rem;
-  text-align: center;
-}
-.image-container {
-}
-.image-container img {
-  width: 100%;
-  height: 20rem;
-  display: block;
-  object-fit: cover;
-}
-.text-container {
-}
-.name {
-}
-.waiting {
-}
-.needs {
-}
-.button-container {
-  background-color: var(--bg-100);
-
-  padding: 0.5rem;
-}
-.more-info {
-  color: var(--bg-0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 </style>

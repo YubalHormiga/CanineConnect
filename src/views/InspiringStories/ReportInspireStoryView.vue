@@ -208,7 +208,7 @@ const handleLimitCharacters = (field, maxLength) => {
           type="radio"
           label="Sexo del Perro"
           name="sex"
-          :options="['Macho', 'Hembra']"
+          :options="['Indiferente','Macho', 'Hembra']"
           validation="required"
           :validation-messages="{ required: 'Seleccionar Sexo es Obligatorio' }"
           v-model="formData.sex"

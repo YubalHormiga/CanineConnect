@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Preload Critical CSS -->
-  <link rel="preload" href="/path/to/critical.css" as="style">
+  <link rel="preload" href="/src/assets/main.css" as="style">
+  <link rel="stylesheet" href="/src/assets/main.css"> <!-- Añadir esta línea para asegurarse de que se use el archivo -->
 
   <!-- Preconnect to External Resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,8 +41,7 @@
 
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="CanineConnect - Tu recurso para perros y más">
-  <meta property="og:description"
-    content="En CanineConnect, encuentra perros perdidos, objetos perdidos, adopta un amigo peludo, y mucho más. Únete a nuestra comunidad y ayuda a hacer una diferencia.">
+  <meta property="og:description" content="En CanineConnect, encuentra perros perdidos, objetos perdidos, adopta un amigo peludo, y mucho más. Únete a nuestra comunidad y ayuda a hacer una diferencia.">
   <meta property="og:image" content="https://canine-connect.vercel.app/src/assets/images/dogs.webp">
   <meta property="og:url" content="https://canine-connect.vercel.app">
   <meta property="og:type" content="website">
@@ -50,13 +49,11 @@
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="CanineConnect - Tu recurso para perros y más">
-  <meta name="twitter:description"
-    content="En CanineConnect, encuentra perros perdidos, objetos perdidos, adopta un amigo peludo, y mucho más. Únete a nuestra comunidad y ayuda a hacer una diferencia.">
+  <meta name="twitter:description" content="En CanineConnect, encuentra perros perdidos, objetos perdidos, adopta un amigo peludo, y mucho más. Únete a nuestra comunidad y ayuda a hacer una diferencia.">
   <meta name="twitter:image" content="https://canine-connect.vercel.app/src/assets/images/dogs.webp">
 
   <!-- Otros meta tags -->
-  <meta name="description"
-    content="CanineConnect: Encuentra perros y objetos perdidos, adopta, explora historias inspiradoras, chatea, y dona para apoyar nuestra causa.">
+  <meta name="description" content="CanineConnect: Encuentra perros y objetos perdidos, adopta, explora historias inspiradoras, chatea, y dona para apoyar nuestra causa.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://canine-connect.vercel.app">
@@ -77,5 +74,4 @@
   <div id="app"></div>
   <script type="module" src="/src/main.js"></script>
 </body>
-
 </html>

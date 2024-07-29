@@ -6,13 +6,20 @@
   /* Colores */
   --text-100: #575757;
   --text-200: #2E2E2E;
+  --text-100-dm: #FFFFFF;
+  --text-200-dm: #E0E0E0;
   --bg-0: #ffffff;
+  --bg-0-dm: #284431;
   --bg-100: #7F9E87;
+  --bg-100-dm: #3C5A49;
   --bg-200: #64826c;
+  --bg-200-dm: #2B4035;
   --bg-300: #284431;
+  --bg-300-dm: #18281F;
   --accent-100: #F2C057;
+  --acent-100-dm: #D4AC08;
   --accent-200: #886300;
-  --primary-color: #007bff; /* Define tu color primario */
+  --acent-200-dm: #B28A06;
 
   /* Otros */
   --primary-font: 'Roboto', sans-serif;
@@ -95,13 +102,14 @@ p {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--text-100);
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
   text-decoration: underline;
+
 }
 
 ul,
@@ -128,3 +136,26 @@ svg {
   margin: 0 auto;
   max-width: var(--max-width);
 }
+
+.darkMode {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.darkMode h2 {
+  color: var(--acent-100-dm)
+}
+
+.darkMode h3 {
+  color: var(--acent-200-dm)
+}
+.darkMode a{
+  color: var(--text-100-dm);
+}
+
+
+.darkMode .container {}
+
+.darkMode .card {}
+
+.darkMode .modal {}

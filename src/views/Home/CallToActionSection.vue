@@ -1,5 +1,6 @@
 <!-- HomeView.vue -->
 <script setup>
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
 // Arreglo de enlaces principales
@@ -15,24 +16,26 @@ const mainLinks = [
 ];
 
 // Arreglo de enlaces de redes sociales
+
+const urlWeb = "https://canine-connect.vercel.app";
 const socialLinks = [
   {
-    href: "https://api.whatsapp.com/send?text=%20https%3A%2F%2Fcanine-connect.vercel.app",
+    href: `https://api.whatsapp.com/send?text=Visita%20CanineConnect%20aquí:%20${urlWeb}`,
     iconClass: "fa-whatsapp",
     alt: "WhatsApp",
   },
   {
-    href: "https://www.addtoany.com/add_to/facebook?linkurl=https://canine-connect.vercel.app",
+    href: `https://www.addtoany.com/add_to/facebook?linkurl=${urlWeb}`,
     iconClass: "fa-facebook",
     alt: "Facebook",
   },
   {
-    href: "https://www.addtoany.com/add_to/twitter?linkurl=https://canine-connect.vercel.app",
+    href: `https://www.addtoany.com/add_to/twitter?linkurl=${urlWeb}`,
     iconClass: "fa-twitter",
     alt: "Twitter",
   },
   {
-    href: "https://www.addtoany.com/add_to/linkedin?linkurl=https://canine-connect.vercel.app",
+    href: `https://www.addtoany.com/add_to/linkedin?linkurl=${urlWeb}`,
     iconClass: "fa-linkedin",
     alt: "LinkedIn",
   },
@@ -46,10 +49,14 @@ const socialLinks = [
       <!-- Iterar sobre los enlaces principales -->
       <li v-for="link in mainLinks" :key="link.text" class="cta-item">
         <template v-if="link.external">
-          <a :href="link.href" target="_blank" class="cta-link">{{ link.text }}</a>
+          <a :href="link.href" target="_blank" class="cta-link">{{
+            link.text
+          }}</a>
         </template>
         <template v-else>
-          <RouterLink :to="{ name: link.name }" class="cta-link">{{ link.text }}</RouterLink>
+          <RouterLink :to="{ name: link.name }" class="cta-link">{{
+            link.text
+          }}</RouterLink>
         </template>
       </li>
       <li class="cta-item cta-media">
@@ -65,9 +72,9 @@ const socialLinks = [
                 :aria-label="link.alt"
                 target="_blank"
               >
-               <!-- Enlace visible para accesibilidad -->
-               <span class="sr-only">{{ link.alt }}</span>
-            </a>
+                <!-- Enlace visible para accesibilidad -->
+                <span class="sr-only">{{ link.alt }}</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -75,8 +82,6 @@ const socialLinks = [
     </ul>
   </section>
 </template>
-
-
 
 <style scoped>
 /* Estilo para ocultar el texto visible pero accesible */
@@ -105,17 +110,17 @@ const socialLinks = [
   display: flex;
   gap: 3rem;
 }
-.cta-media span{
+.cta-media span {
   margin-right: 1rem;
 }
 
-.cta-link, span {
-  color: #000;
+.cta-link,
+span {
   text-decoration: none;
 }
 
 .cta-link:hover {
-  border-bottom: 2px solid var( --accent-100);
+  border-bottom: 2px solid var(--accent-100);
 }
 
 .socialbtns {
@@ -146,9 +151,4 @@ const socialLinks = [
     -1px -1px 0px #fff;
   transition: all ease 0.5s;
 }
-
 </style>
-
-
-
-

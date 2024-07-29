@@ -44,12 +44,12 @@ const authStore = useAuthStore();
 </script>
 
 <template>
-  <div></div>
   <Link to="add-adoption" v-if="authStore.isAdmin" Añadir Adopción
     >Añadir perro en adopción</Link
   >
   <header>
-    <h2>¡Encuentra a tu Nuevo Mejor Amigo en CanineConnect!</h2>
+    <h2>¡Encuentra a tu Nuevo Mejor Amigo en CanineConnect!</h2> 
+   
   </header>
 
   <main>
