@@ -1,9 +1,13 @@
-<!-- MainNavigation.vue   OK -->
+<!-- MainNavigation.vue -->
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { RouterLink } from "vue-router";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
+
+import LogoutUser from "@/assets/icons/LogoutUser.vue";
+import LoginUser from "@/assets/icons/LoginUser.vue";
+
 import { useAuthStore } from "@/stores/authStore";
 
 const navItems = [
@@ -34,9 +38,14 @@ const closeMenu = (event) => {
   }
 };
 
-const darkMode = ()=>{
-  document.body.classList.toggle('darkMode')
-}
+const darkMode = () => {
+  document.body.classList.toggle("darkMode");
+};
+
+const handleNavItemClick = () => {
+  isMenuOpen.value = false;
+};
+
 onMounted(() => {
   document.addEventListener("click", closeMenu);
 });
@@ -66,15 +75,13 @@ onBeforeUnmount(() => {
           Hola: <span> {{ userData?.displayName ?? "Usuario" }}</span>
         </p>
       </div>
-      <!-- <div class="darkModeIcon" @click="darkMode">
-        <img src="../assets/icons/dark-mode.svg" alt="darkMode" />
-      </div> -->
       <div :class="['nav-items', { open: isMenuOpen }]">
         <div class="nav-item" v-for="(item, index) in navItems" :key="index">
           <router-link
             active-class="active-link"
             class="nav-link"
             :to="item.to"
+            @click="handleNavItemClick"
             >{{ item.text }}</router-link
           >
         </div>
@@ -83,7 +90,8 @@ onBeforeUnmount(() => {
             active-class="active-link"
             class="nav-link"
             :to="{ name: 'admin' }"
-            >Administación</router-link
+            @click="handleNavItemClick"
+            >Administración</router-link
           >
         </div>
       </div>
@@ -95,25 +103,7 @@ onBeforeUnmount(() => {
             @click="logoutUser"
             :to="{ name: 'home' }"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-logout"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="#ffffff"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
-              />
-              <path d="M9 12h12l-3 -3" />
-              <path d="M18 15l3 -3" />
-            </svg>
+            <LogoutUser />
           </router-link>
         </div>
         <div
@@ -121,29 +111,7 @@ onBeforeUnmount(() => {
           class="login-container"
         >
           <router-link :to="{ name: 'login' }" class="login-link">
-            <div class="identity">
-              <p class="identify-text">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-user-circle"
-                  width="33"
-                  height="33"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="#ffffff"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                  <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                  <path
-                    d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
-                  />
-                </svg>
-              </p>
-            </div>
+            <LoginUser />
           </router-link>
         </div>
       </div>
@@ -153,15 +121,15 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* DarkMode */
-.darkModeIcon{
+.darkModeIcon {
   width: 3rem;
   height: auto;
   filter: invert(100%);
   cursor: pointer;
-  margin-left: 1rem; 
+  margin-left: 1rem;
   /* visibility: hidden; */
-  
 }
+
 /* Hamburguer */
 .hamburger-menu {
   display: none;

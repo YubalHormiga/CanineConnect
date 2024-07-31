@@ -51,6 +51,7 @@ body {
   line-height: 1.6;
   color: var(--text-100);
   hyphens: auto;
+  text-align: justify;
 }
 
 input,

@@ -63,6 +63,11 @@ const router = createRouter({
       component: () => import("../views/Adoption/ListDogsAdoption.vue"),
     },
     {
+      path: "/adopcion/editar/:id",
+      name: "edit-adoption",
+      component: () => import("../views/Adoption/EditAdoptionDogVIew.vue"),
+    },
+    {
       path: "/adopcion/informacion/:id",
       name: "dog-information",
       component: () => import("../views/Adoption/DogInformationView.vue"),

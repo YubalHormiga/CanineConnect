@@ -27,6 +27,14 @@ import MainNavigation from "./share/MainNavigation.vue";
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 33%;
+  margin-bottom: 2rem
+}
+
+.navegation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 .wrapper {
   display: flex;
@@ -34,25 +42,16 @@ import MainNavigation from "./share/MainNavigation.vue";
   min-height: 100vh;
   overflow-x: hidden;
 }
-.navegation {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
 .router-container {
   flex: 1;
   margin-bottom: 1rem;
   padding: 1rem;
 }
 
-.container {
-  text-align: justify;
-}
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
   .container {
     max-width: 120rem;
     margin: 0 auto;
   }
-}
+} */
 </style>

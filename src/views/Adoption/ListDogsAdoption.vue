@@ -1,12 +1,15 @@
 <script setup>
-import { useAdoptionStore } from "@/stores/adoptionStore";
-import AdoptionCardView from "./AdoptionCardView.vue";
 import { ref, computed } from "vue";
+import Link from "@/components/Link.vue";
+
+import AdoptionCardView from "./AdoptionCardView.vue";
+
+import { useAdoptionStore } from "@/stores/adoptionStore";
 
 const adoptionStore = useAdoptionStore();
 
 const selectedGender = ref("indifferent");
-const selectedCategory = ref("En adopción");
+const selectedCategory = ref("inAdoptionProcess");
 
 const sexSelect = (e) => {
   selectedGender.value = e.target.value;
@@ -45,7 +48,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="category"
-                value="En adopción"
+                value="inAdoptionProcess"
                 @change="categorySelect"
                 checked
               />
@@ -57,7 +60,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="category"
-                value="Adopciones dobles"
+                value="doubleAdoption"
                 @change="categorySelect"
               />
               Adopciones dobles
@@ -68,7 +71,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="category"
-                value="En acogida"
+                value="inFosterCare"
                 @change="categorySelect"
               />
               En acogida
@@ -79,7 +82,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="category"
-                value="Casos especiales"
+                value="specialCases"
                 @change="categorySelect"
               />
               Casos especiales
@@ -90,7 +93,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="category"
-                value="Adoptados"
+                value="adopted"
                 @change="categorySelect"
               />
               Adoptados
@@ -118,7 +121,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="gender"
-                value="Macho"
+                value="male"
                 @change="sexSelect"
               />
               Masculino
@@ -129,7 +132,7 @@ const filteredAdoptions = computed(() => {
               <input
                 type="radio"
                 name="gender"
-                value="Hembra"
+                value="female"
                 @change="sexSelect"
               />
               Femenino
@@ -137,6 +140,9 @@ const filteredAdoptions = computed(() => {
           </div>
         </div>
       </section>
+      <div>
+        <Link to="adoption">Volver </Link>
+      </div>
     </div>
     <div class="adoptionCardView">
       <AdoptionCardView
@@ -150,6 +156,8 @@ const filteredAdoptions = computed(() => {
 
 <style scoped>
 .section {
+  display: flex;
+  flex-direction: column;
   margin: 0 2rem 2rem 0;
 }
 .adoptionCardView {
@@ -164,11 +172,30 @@ const filteredAdoptions = computed(() => {
   }
 }
 
-.categories-container {
-}
 .categories {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.noData {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 640px) {
+  .noData {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
+.noData h4 {
+  display: block;
+  text-align: center;
+}
+.noData p {
+  display: block;
+  text-align: center;
+  color: rgb(160, 25, 25);
+  font-weight: bold;
 }
 </style>

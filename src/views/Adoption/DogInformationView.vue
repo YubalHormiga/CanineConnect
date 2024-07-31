@@ -18,12 +18,12 @@ const dog = useDocument(docRef);
     </div>
     <div class="information">
       <div class="basic-information">
-        <h2 class="pet-name">{{ dog.dogName }}</h2>
-        <p class="pet-status">Estado: <span>{{ dog.adoptionStatus }}</span></p>
+        <h3 class="pet-name">{{ dog.dogName }}</h3>
+        <p class="pet-status">{{ dog.adoptionStatus }}</p>
       </div>
       <div class="additional-information">
         <section class="section-data">
-          <h2 class="section-title">Mis datos</h2>
+          <h3 class="section-title">Mis datos</h3>
           <div class="data-list">
             <p class="data-item">
               Entrada: <span>{{ dog.rescueDate }}</span>
@@ -49,12 +49,11 @@ const dog = useDocument(docRef);
           </div>
         </section>
         <section class="section-history">
-          <h2 class="pet-title">{{ dog.title }}</h2>
+          <h3 class="pet-title">{{ dog.title }}</h3>
           <h3 class="section-title">Historia</h3>
           <p class="history-description">{{ dog.dogStory }}</p>
         </section>
         <section class="section-medical-history">
-          <h2 class="section-title">Historial</h2>
           <div class="medical-history">
             <h3 class="medical-title">Historial Medico</h3>
             <p class="medical-description">{{ dog.medicalHistory }}</p>
@@ -65,11 +64,11 @@ const dog = useDocument(docRef);
           </div>
         </section>
         <section class="section-description">
-          <h2 class="section-title">Descripción</h2>
+          <h3 class="section-title">Descripción</h3>
           <p class="description-text">{{ dog.description }}</p>
         </section>
         <section class="section-requirements">
-          <h2 class="section-title">Requisitos</h2>
+          <h3 class="section-title">Requisitos</h3>
           <p class="requirements-text">{{ dog.requirements }}</p>
         </section>
       </div>
@@ -108,7 +107,8 @@ const dog = useDocument(docRef);
 }
 .pet-status,
 .pet-title {
-  /* estilos para el estado y el título de la mascota */
+  font-weight: bold;
+  color:var(--accent-100)
 }
 .additional-information {
   /* estilos para la información adicional */

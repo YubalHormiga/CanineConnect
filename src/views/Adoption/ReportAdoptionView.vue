@@ -165,11 +165,11 @@ const handleLimitCharacters = (field, maxLength) => {
       </p>
     </article>
   </section>
-  <h2>Rellena Formulario</h2>
 
   <!-- Formulario -->
   <div class="form">
     <FormKit type="form" submit-label="Enviar" @submit="handleSubmit">
+      <h2>Rellena Formulario</h2>
       <!-- Campos del formulario -->
       <h3>Información General</h3>
       <FormKit
@@ -263,11 +263,31 @@ const handleLimitCharacters = (field, maxLength) => {
             value: '',
             attrs: { disabled: true },
           },
-          'En adopción',
-          'Adopciones  dobles',
-          'En acogida',
-          'Casos especiales',
-          'Adoptados',
+          {
+            label: 'En adopción',
+            value: 'inAdoptionProcess',
+            attrs: { disabled: false },
+          },
+          {
+            label: 'Adopciones  dobles',
+            value: 'doubleAdoption',
+            attrs: { disabled: false },
+          },
+          {
+            label: 'En acogida',
+            value: 'inFosterCare',
+            attrs: { disabled: false },
+          },
+          {
+            label: 'Casos especiales',
+            value: 'specialCases',
+            attrs: { disabled: false },
+          },
+          {
+            label: 'Adoptados',
+            value: 'adopted',
+            attrs: { disabled: false },
+          },
         ]"
         validation="required"
         :validation-messages="{ required: 'El estado es      Obligatorio' }"
@@ -314,7 +334,10 @@ const handleLimitCharacters = (field, maxLength) => {
         type="radio"
         label="Sexo del Perro"
         name="sex"
-        :options="['Macho', 'Hembra']"
+        :options="[
+          { label: 'Macho', value: 'male' },
+          { label: 'Hembra', value: 'female' },
+        ]"
         validation="required"
         :validation-messages="{ required: 'Seleccionar Sexo es Obligatorio' }"
         v-model="formData.sex"
@@ -481,21 +504,21 @@ span {
 .form {
   display: flex;
   justify-content: center;
-  /* Centrar horizontalmente */
   align-items: center;
-  /* Centrar verticalmente */
   min-height: 50vh;
-  /* Altura mínima para centrar verticalmente */
 }
 
 .form > * {
   max-width: 40rem;
-  /* Ancho máximo del formulario */
   width: 100%;
-  /* Hace que el formulario ocupe todo el ancho disponible */
   margin: 0 auto;
   margin-bottom: 1rem;
-  /* Espaciado entre elementos del formulario */
+}
+.form h2 {
+  text-align: center;
+}
+.form h3 {
+  text-align: center margin;
 }
 
 /* Contenedor para la imagen */
